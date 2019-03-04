@@ -7,52 +7,60 @@
  * A class the represents an individual tile on the
  * Connect Four board. A subclass of JButton. 
  * 
- * @author Albert Ong
- * @since 14.02.2019
+ * @author Krish Ghiya, Holly Lind, and Albert Ong
+ * @since 27.02.2019
  */
 
 import javax.swing.*;
 
 public class Tile extends JButton {       
   
-  private static int x_coord;
-  private static int y_coord;
-  private static String color;
-  private static boolean filled;
+  private int x_coord;
+  private int y_coord;
+  private String color;
+  private boolean filled;
   
   // The default constructor for the Tile class. 
   public Tile() {
-    
     x_coord = 0;
     y_coord = 0;
     filled = false;
   }
   
+  public Tile(String input) {
+    super(input);
+  }
+  
   // Getter methods.
-  public static int getXCoord() {
+  public int getXCoord() {
     return x_coord;
   }
-  public static int getYCoord() {
+  public int getYCoord() {
     return y_coord;
   }
-  public static String getColor() {
+  public String getColor() {
     return color;
   }
-  public static boolean getFilled() {
+  public boolean getFilled() {
     return filled;
   }
   
   // Setter methods.
-  public static void setXCoord(int x) {
+  public void setXCoord(int x) {
     x_coord = x;
   }
-  public static void setYCoord(int y) {
+  public void setYCoord(int y) {
     y_coord = y;
   }
-  public static void setColor(String color_input) {
+  public void setColor(String color_input) {
     color = color_input;
   }
-  public static void setFilled(boolean filled_input) {
+  public void setFilled(boolean filled_input) {
     filled = filled_input;
+  }
+  
+  
+  public String toString() {
+    return x_coord + " " + y_coord;
   }
 }
