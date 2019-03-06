@@ -1,50 +1,93 @@
 package game;
 
-// pretty much the same as the main version
-
+/**
+ * Tile object represents one Tile
+ * each Tile has (x, y) coordinates, color, and is filled/unfilled
+ */
 public class Tile {
 
-	private int 	x_coord;
-	private int 	y_coord;
-	private String 	color;
-	private boolean filled;
-
 	
-	public Tile(int x_coord, int y_coord)
-	{
-		this.x_coord 	= x_coord;
-		this.y_coord 	= y_coord;
-		color 			= "";
-		filled 			= false;
+	/**
+	 * creates a Tile at coordinates (x, y)
+	 * @param x_coord, y_coord: determine where the Tile is
+	 * @postcondition Tile is colorless and unfilled
+	 */
+	public Tile(int x_coord, int y_coord) {
+		this.x_coord = x_coord;
+		this.y_coord = y_coord;
+		color = "";
+		filled = false;
 	}
 	
 	
-	// getter methods
-	public int getXCoord() 		{ return x_coord; }
-	public int getYCoord() 		{ return y_coord; }
-	public String getColor() 	{ return color; }
-	public boolean getFilled() 	{ return filled; }
+	/**
+	 * access method for x
+	 * @return x_coord
+	 */
+	public int getXCoord() {
+		return x_coord;
+	}
 	
 	
-	// setter method for color
-	public void setColor(String newColor)
-	{
+	/**
+	 * access method for y
+	 * @return y_coord
+	 */
+	public int getYCoord() { 
+		return y_coord;
+	}
+	
+	
+	/**
+	 * access method for color
+	 * @return color
+	 */
+	public String getColor() {
+		return color;
+	}
+	
+	
+	/**
+	 * access method for fill
+	 * @return filled
+	 */
+	public boolean getFilled() {
+		return filled;
+	}
+	
+	
+	/**
+	 * modifier method for x
+	 * @param newColor: String to set color to
+	 */
+	public void setColor(String newColor) {
 		color = newColor;
 	}
 	
 	
-	// setter method for filled
-	// can't make a Tile unfilled using this - no reason to do so mid-game
-	public void nowFilled()
-	{
+	/**
+	 * sets filled to true 
+	 * use after a player selects this particular Tile
+	 * @postcondition Tile is filled
+	 */
+	public void nowFilled() {
 		filled = true;
 	}
 	
 	
-	// resets a Tile's color and filled to default
-	public void resetTile()
-	{
-		color	= "";
-		filled 	= false;
+	/**
+	 * resets all of Tile parameters except for coordinates
+	 * use when new game is started
+	 * @postcondition Tile is colorless and unfilled
+	 */
+	public void resetTile() {
+		color = "";
+		filled = false;
 	}
+	
+	
+	private int x_coord;
+	private int y_coord;
+	private String color;
+	private boolean filled;
 }
