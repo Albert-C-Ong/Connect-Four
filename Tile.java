@@ -9,7 +9,8 @@ public class Tile {
 	
 	/**
 	 * creates a Tile at coordinates (x, y)
-	 * @param x_coord, y_coord: determine where the Tile is
+	 * @param x_coord: x coordinate of the Tile
+	 * @param y_coord: y coordinate of the Tile
 	 * @postcondition Tile is colorless and unfilled
 	 */
 	public Tile(int x_coord, int y_coord) {
