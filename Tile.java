@@ -8,7 +8,7 @@
  * Connect Four board. A subclass of JButton. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 27.02.2019
+ * @since 08.03.2019
  */
 
 import javax.swing.*;
@@ -17,41 +17,37 @@ public class Tile extends JButton {
   
   private int x_coord;
   private int y_coord;
-  private String color;
-  private boolean filled;
+  private String color = "NONE";
+  private boolean filled = false;
   
   // The default constructor for the Tile class. 
-  public Tile() {
-    x_coord = 0;
-    y_coord = 0;
-    filled = false;
+  public Tile(int x, int y) {
+    x_coord = x;
+    y_coord = y;
   }
   
-  public Tile(String input) {
+  public Tile(int x, int y, String input) {
     super(input);
+    x_coord = x;
+    y_coord = y;
+    
   }
   
   // Getter methods.
-  public int getXCoord() {
-    return x_coord;
+  public int getXCoord() { 
+    return x_coord; 
   }
-  public int getYCoord() {
-    return y_coord;
+  public int getYCoord() { 
+    return y_coord; 
   }
   public String getColor() {
-    return color;
+    return color; 
   }
-  public boolean getFilled() {
-    return filled;
+  public boolean getFilled() { 
+    return filled; 
   }
   
   // Setter methods.
-  public void setXCoord(int x) {
-    x_coord = x;
-  }
-  public void setYCoord(int y) {
-    y_coord = y;
-  }
   public void setColor(String color_input) {
     color = color_input;
   }
