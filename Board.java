@@ -1,9 +1,18 @@
 package game;
 
-// if we make the Board its own class, it'd be something like this
-
 import java.util.ArrayList;
 
+/** Board.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * A class the represents the board Connect Four
+ * is played on. Inherits a 2D ArrayList of Tiles.
+ * 
+ * @author Holly Lind
+ * @since 3/9/2019
+ */
 public class Board extends ArrayList<ArrayList<Tile>> {
 
 	private static final int BOARD_COLUMNS 	= 7;

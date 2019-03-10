@@ -1,8 +1,16 @@
 package game;
 
-// placeholder class -- should be replaced with actual UI
-// lets you play Connect Four in the console
-
+/** ConnectFourConsole.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * A class that lets you play Connect Four
+ * in the console. To be replaced with UI.
+ * 
+ * @author Holly Lind
+ * @since 3/9/2019
+ */
 import java.util.Scanner;
 
 public class ConnectFourConsole {

@@ -1,8 +1,16 @@
 package game;
 
-// Connect Four game mechanics w/o any UI
-// TODO -- need to write a method for detecting a tie; then use it at the end of oneTurn() 
-
+/** ConnectFourGame.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * A class that deals with the game mechanics
+ * of Connect Four.
+ * 
+ * @author Holly Lind
+ * @since 3/9/2019
+ */
 public class ConnectFourGame {
 
 	private Board gameBoard;

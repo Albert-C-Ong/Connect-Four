@@ -1,8 +1,15 @@
 package game;
 
-/**
- * Tile object represents one Tile
- * each Tile has (x, y) coordinates, color, and is filled/unfilled
+/** Tile.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * A class the represents an individual tile on the
+ * Connect Four board.
+ * 
+ * @author Holly Lind
+ * @since 3/9/2019
  */
 public class Tile {
 
