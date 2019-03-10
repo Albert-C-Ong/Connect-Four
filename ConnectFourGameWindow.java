@@ -7,12 +7,10 @@
  * Game window for Connect Four. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 08.03.2019
+ * @since 09.03.2019
  * 
  * TODO:
- *   Design and implement the icon of the window
  *   Implement background image 
- *   Implement play again and exit after checkWin()
  */
 
 import java.awt.*;
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 
 public class ConnectFourGameWindow extends JFrame implements ActionListener {
@@ -33,28 +32,28 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
   // A string that represents the current player. Defaults to player 1. 
   private static String current_player = "Player 1";
   
+  //Retrieves the current working directory. 
+  private String cwd = System.getProperty("user.dir");
+  
   /** Class constructor for CenterSideGameWindow.
    * 
    */
   public ConnectFourGameWindow() {
    
-    // Assigns the title and size of the window. 
+    // Assigns the title, size, and background color of the window. 
     setTitle("Connect Four");
     setSize(new Dimension(1600, 900));
-    
-    // Retrieves the current working directory. 
-    String cwd = System.getProperty("user.dir");
+    getContentPane().setBackground(Color.WHITE);
     
     // Retrieves and sets the window icon. 
-    String icon_path = cwd + "\\images\\window_icon.png";
-    ImageIcon icon = new ImageIcon(icon_path);
+    ImageIcon icon = new ImageIcon(cwd + "\\images\\window_icon.png");
     setIconImage(icon.getImage());
     
-    // Setting the background current causes the button the display incorrectly. 
-//    String background_path = cwd + "\\images\\background.png";
-//    JLabel background = new JLabel(new ImageIcon(background_path));
-//    add(background);
-    
+    // Need to implement background later. 
+//    JLabel background = new JLabel();
+//    background.setIcon(new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png"));
+//    setContentPane(background);
+  
     // Adds the grid layout. 
     GridBagLayout grid = new GridBagLayout();
     setLayout(grid);
@@ -65,6 +64,7 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
     gbc.insets = new Insets(4, 4, 4, 4);
     
     
+    // Initializing the grid of buttons. 
     for (int y = 0; y < 6; y++) {
       
       ArrayList<Tile> row = new ArrayList<Tile>();
@@ -78,6 +78,10 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
         
         // Sets the size of the button. 
         add_button.setPreferredSize(new Dimension(100, 100)); 
+        
+        add_button.setIcon(new ImageIcon());
+        add_button.setBorderPainted(false);
+        add_button.setRolloverEnabled(false);
         
         // Assigns the action listener to the button. 
         add_button.addActionListener(this);
@@ -139,45 +143,51 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
       
       // Variables that will be changed in the current tile. 
       String tile_color; 
-      Color background_color = new Color(0, 0, 0);
+      String icon_path;
       String next_player;
+      
       
       // The new values if the current player is Player 1. 
       if (current_player == "Player 1") {
         tile_color = "RED";
-        background_color = new Color(255, 42, 42, 255); // Color.RED;
+        icon_path = "\\images\\button_red.png";
         next_player = "Player 2";
       }
       
       // The new values if the current player is Player 2. 
       else {
         tile_color = "BLACK";
-        background_color = new Color(26, 26, 26, 255); // Color.BLACK;
+        icon_path = "\\images\\button_black.png";
         next_player = "Player 1";
       }
       
       // Changes the color and filled properties to the tile. 
       current_tile.setColor(tile_color);
-      current_tile.setBackground(background_color);
+      current_tile.setIcon(new ImageIcon(cwd + icon_path));
       current_tile.setFilled(true);
       
       // Changes the current player to the next player. 
       current_player = next_player;
-      
     }
     
+    // Checks which player won the game. 
     String winner = checkWin();
     
     if (winner == "Player 1" || winner == "Player 2") {
+      
+      // Displays who won the game.
       JOptionPane.showMessageDialog(null, winner + " wins!");
       
+      // Prompts the user if they want to play again. 
       int play_again = JOptionPane.showConfirmDialog(null, "Play again?", null, JOptionPane.YES_NO_OPTION);
       
+      // Restarts the game if 'yes' was selected. 
       if (play_again == JOptionPane.YES_OPTION) {
-        // Implement play again here. 
+        restart();
       }
+      // Closes the window if 'no' was selected. 
       else {
-        // Implement exit here. 
+        dispose();
       }
     }
   }
@@ -350,8 +360,8 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
    * Assembles the diagonals given an array of starting coordinates
    * and the direction of the diagonals.
    */
-  ArrayList<ArrayList<Tile>> getDiagonals(int[][] starting_coords, 
-                                          boolean is_pos_slope) {
+  private ArrayList<ArrayList<Tile>> getDiagonals(int[][] starting_coords, 
+                                                  boolean is_pos_slope) {
     
     ArrayList<ArrayList<Tile>> diagonals = new ArrayList<ArrayList<Tile>>();
     
@@ -381,5 +391,28 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
     
     return diagonals;
   }
+  
+  
+  /** Restarts the ConnectFourGameWindow
+   * 
+   * Activated when the player opts to play again. 
+   */
+  public void restart() {
+    
+    // Resets the current player to Player 1.
+    current_player = "Player 1";
+    
+    // Iterates throught every tile on the board. 
+    for (ArrayList<Tile> row : board) {
+      for (Tile tile : row) {
+        
+        // Resets the values of the tile to a those of a blank tile. 
+        tile.setIcon(new ImageIcon());
+        tile.setColor("NONE");
+        tile.setFilled(false);
+      }
+    }
+  }
+  
   
 }

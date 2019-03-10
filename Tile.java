@@ -1,4 +1,3 @@
-package game;
 
 /** Tile.java
  * 
@@ -6,12 +5,11 @@ package game;
  * Professor Katarzyna Tarnowska
  * 
  * A class the represents an individual tile on the
- * Connect Four board.
+ * Connect Four board. A subclass of JButton. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 08.03.2019
+ * @since 09.03.2019
  */
-public class Tile {
 
 import javax.swing.*;
 
