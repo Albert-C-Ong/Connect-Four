@@ -1,3 +1,14 @@
+
+/** TileTest.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * JUnit test class for Tile.java. 
+ * @author Krish Ghiy, Holly Lind, and Albert Ong
+ * @since 09.03.2019
+ */
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
