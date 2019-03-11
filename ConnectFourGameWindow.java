@@ -7,10 +7,12 @@
  * Game window for Connect Four. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 09.03.2019
+ * @since 11.03.2019
  * 
  * TODO:
- *   Implement background image 
+ *   Add timer for Player 1/Player 2 turns. 
+ *   Indicate who's turn it it. 
+ *   checkTie() 
  */
 
 import java.awt.*;
@@ -21,16 +23,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 
 public class ConnectFourGameWindow extends JFrame implements ActionListener {
   
   // A two dimensional ArrayList that represents the board of Connect Four. 
-  private static ArrayList<ArrayList<Tile>> board = new ArrayList<ArrayList<Tile>>();
+  private ArrayList<ArrayList<Tile>> board = new ArrayList<ArrayList<Tile>>();
   
   // A string that represents the current player. Defaults to player 1. 
-  private static String current_player = "Player 1";
+  private String current_player = "Player 1";
   
   //Retrieves the current working directory. 
   private String cwd = System.getProperty("user.dir");
@@ -49,20 +50,16 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
     ImageIcon icon = new ImageIcon(cwd + "\\images\\window_icon.png");
     setIconImage(icon.getImage());
     
-    // Need to implement background later. 
-//    JLabel background = new JLabel();
-//    background.setIcon(new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png"));
-//    setContentPane(background);
+    // Retrieves and displays the background image. 
+    JLabel background = new JLabel();
+    background.setIcon(new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png"));
+    setContentPane(background);
   
     // Adds the grid layout. 
-    GridBagLayout grid = new GridBagLayout();
-    setLayout(grid);
+    GridBagLayout layout = new GridBagLayout();
+    setLayout(layout);
     
     GridBagConstraints gbc = new GridBagConstraints();
-    
-    // Sets the gap between buttons in the layout. 
-    gbc.insets = new Insets(4, 4, 4, 4);
-    
     
     // Initializing the grid of buttons. 
     for (int y = 0; y < 6; y++) {
@@ -79,9 +76,10 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
         // Sets the size of the button. 
         add_button.setPreferredSize(new Dimension(100, 100)); 
         
-        add_button.setIcon(new ImageIcon());
+        // Makes the button blank, both visually and internally. 
+        add_button.setOpaque(false);
+        add_button.setContentAreaFilled(false);
         add_button.setBorderPainted(false);
-        add_button.setRolloverEnabled(false);
         
         // Assigns the action listener to the button. 
         add_button.addActionListener(this);
@@ -89,12 +87,11 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
         row.add(add_button);
         add(add_button, gbc);
       }
-      
       // Add each row to the board. 
       board.add(row);
     }
     
-    setVisible(true); 
+    setVisible(true);
   } 
   
   
@@ -175,11 +172,17 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
     
     if (winner == "Player 1" || winner == "Player 2") {
       
+      Font message_font = new Font("Arial", Font.BOLD, 60);
+      
       // Displays who won the game.
-      JOptionPane.showMessageDialog(null, winner + " wins!");
+      JLabel winner_message = new JLabel(winner + " wins!");
+      winner_message.setFont(message_font);
+      JOptionPane.showMessageDialog(this, winner_message);
       
       // Prompts the user if they want to play again. 
-      int play_again = JOptionPane.showConfirmDialog(null, "Play again?", null, JOptionPane.YES_NO_OPTION);
+      JLabel play_again_message = new JLabel("Play again?");
+      play_again_message.setFont(message_font);
+      int play_again = JOptionPane.showConfirmDialog(this, play_again_message, null, JOptionPane.YES_NO_OPTION);
       
       // Restarts the game if 'yes' was selected. 
       if (play_again == JOptionPane.YES_OPTION) {

@@ -8,10 +8,10 @@
  * Connect Four board. A subclass of JButton. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 09.03.2019
+ * @since 11.03.2019
  */
 
-import javax.swing.*;
+import javax.swing.JButton;
 
 public class Tile extends JButton {       
   
