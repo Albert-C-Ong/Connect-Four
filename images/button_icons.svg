@@ -14,9 +14,9 @@
    viewBox="0 0 26.458333 26.458334"
    version="1.1"
    id="svg8"
-   sodipodi:docname="button_icons_testing.svg"
+   sodipodi:docname="button_icons.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   inkscape:export-filename="C:\Users\alber\eclipse-workspace\Testing\assets\button_blank.png"
+   inkscape:export-filename="C:\Users\alber\eclipse-workspace\Connect Four\images\button_red.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -29,8 +29,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="57.152851"
-     inkscape:cy="37.142713"
+     inkscape:cx="64.811602"
+     inkscape:cy="48.98085"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -58,16 +58,24 @@
      id="layer1"
      transform="translate(0,-270.54166)">
     <circle
-       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.14084284;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.11267427;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path3845"
        cx="13.229167"
        cy="283.77081"
-       r="13.229167" />
+       r="10.583333"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <circle
        style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:0.14084284;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path3845-4"
-       cx="49.798363"
-       cy="283.77081"
+       cx="52.561577"
+       cy="288.04712"
+       r="13.229167" />
+    <circle
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.14084284;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3845-5"
+       cx="52.561577"
+       cy="255.30595"
        r="13.229167" />
   </g>
 </svg>
