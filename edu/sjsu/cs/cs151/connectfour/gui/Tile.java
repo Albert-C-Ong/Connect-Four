@@ -1,4 +1,5 @@
 
+
 /** Tile.java
  * 
  * CS 151 Spring 2019
@@ -8,10 +9,13 @@
  * Connect Four board. A subclass of JButton. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 11.03.2019
+ * @since 20.03.2019
  */
 
+package edu.sjsu.cs.cs151.connectfour.gui;
+
 import javax.swing.JButton;
+
 
 public class Tile extends JButton {       
   

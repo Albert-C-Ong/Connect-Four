@@ -7,13 +7,14 @@
  * Game window for Connect Four. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 11.03.2019
+ * @since 20.03.2019
  * 
  * TODO:
- *   Add timer for Player 1/Player 2 turns. 
  *   Indicate who's turn it it. 
  *   checkTie() 
  */
+
+package edu.sjsu.cs.cs151.connectfour.gui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,11 +37,12 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
   //Retrieves the current working directory. 
   private String cwd = System.getProperty("user.dir");
   
+  
   /** Class constructor for CenterSideGameWindow.
    * 
    */
   public ConnectFourGameWindow() {
-   
+    
     // Assigns the title, size, and background color of the window. 
     setTitle("Connect Four");
     setSize(new Dimension(1600, 900));
@@ -91,6 +93,7 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
       board.add(row);
     }
     
+    setResizable(false);
     setVisible(true);
   } 
   

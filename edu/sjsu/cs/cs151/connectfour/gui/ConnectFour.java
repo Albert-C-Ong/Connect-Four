@@ -1,4 +1,5 @@
 
+
 /** ConnectFour.java
  * 
  * CS 151 Spring 2019
@@ -7,11 +8,13 @@
  * The main program to the Connect Four game. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 11.03.2019
+ * @since 20.03.2019
  * 
  * TODO:
- *   Implement ConnectFourMenuWindow?
+ *   Connect ConnectFourMenuWindow and ConnectFourGameWindow. 
  */
+
+package edu.sjsu.cs.cs151.connectfour.gui;
 
 
 public class ConnectFour {

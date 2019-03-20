@@ -1,4 +1,5 @@
 
+
 /** ConnectFourMenuWindow.java
  * 
  * CS 151 Spring 2019
@@ -7,11 +8,13 @@
  * Menu window for Connect Four. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 11.03.2019
+ * @since 20.03.2019
  * 
  * TODO:
  *   Finish implementation and functionality. 
  */
+
+package edu.sjsu.cs.cs151.connectfour.gui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,18 +39,39 @@ public class ConnectFourMenuWindow extends JFrame implements ActionListener {
     ImageIcon icon = new ImageIcon(cwd + "\\images\\window_icon.png");
     setIconImage(icon.getImage());
     
-    setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+    GridBagLayout layout = new GridBagLayout();
+    setLayout(layout);
     
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = 0;
+    gbc.insets = new Insets(0, 0, 35, 0);
     
     JLabel logo = new JLabel(new ImageIcon(cwd + "\\images\\ConnectFour_logo.png"));
-    add(logo);
+    logo.setAlignmentX(Component.CENTER_ALIGNMENT);
+    add(logo, gbc);
+
     
-    add(new JButton("Button 1"));
-    add(new JButton("Button 2"));
-    add(new JButton("Button 3"));
-    add(new JButton("Button 4"));
-    add(new JButton("Button 5"));
+    String[] button_names = {"Play", "About", "Exit"};
     
+    for (String name : button_names) {
+      
+      JButton button = new JButton();
+      button.setName(name);
+      button.setAlignmentX(Component.CENTER_ALIGNMENT);
+      button.setPreferredSize(new Dimension(400, 80)); 
+      button.addActionListener(this);
+      
+      button.setOpaque(false);
+      button.setContentAreaFilled(false);
+      button.setBorderPainted(false);
+      
+      String icon_path = cwd + "\\images\\menu_button_" + name.toLowerCase() + ".png";
+      button.setIcon(new ImageIcon(icon_path));
+      
+      add(button, gbc);
+    }
+    
+    setResizable(false);
     setVisible(true);
   }
   
@@ -55,8 +79,19 @@ public class ConnectFourMenuWindow extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent event) {
     
     // Retrieves the button object that was pressed. 
-    Tile button = (Tile)event.getSource();
+    JButton button = (JButton)event.getSource();
     
-    System.out.println("Hello world!");
+    String button_name = button.getName();
+    
+    if (button_name == "Play") {
+      System.out.println("Play button was pressed!");
+      // changePanel(new ConnectFourGameWindow());
+    }
+    else if (button_name == "About") {
+      System.out.println("About button was pressed!");
+    }
+    else if (button_name == "Exit") {
+      dispose();
+    }
   }
 }
