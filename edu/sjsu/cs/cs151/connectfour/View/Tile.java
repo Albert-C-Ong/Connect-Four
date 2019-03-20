@@ -12,7 +12,7 @@
  * @since 20.03.2019
  */
 
-package edu.sjsu.cs.cs151.connectfour.gui;
+package edu.sjsu.cs.cs151.connectfour.View;
 
 import javax.swing.JButton;
 

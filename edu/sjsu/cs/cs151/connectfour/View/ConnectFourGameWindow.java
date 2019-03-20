@@ -14,7 +14,7 @@
  *   checkTie() 
  */
 
-package edu.sjsu.cs.cs151.connectfour.gui;
+package edu.sjsu.cs.cs151.connectfour.View;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
