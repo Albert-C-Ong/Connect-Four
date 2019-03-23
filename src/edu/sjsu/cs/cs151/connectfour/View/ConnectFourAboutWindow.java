@@ -73,9 +73,7 @@ public class ConnectFourAboutWindow extends JFrame implements ActionListener {
     
     // Retrieves the button object that was pressed. 
     JButton button = (JButton)event.getSource();
-    
     dispose();
-    new ConnectFourMenuWindow();
   }
 
 }

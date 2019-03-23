@@ -97,10 +97,9 @@ public class ConnectFourMenuWindow extends JFrame implements ActionListener {
     
     if (button_name == "PLAY") {
       System.out.println("Play button was pressed!");
-      // changePanel(new ConnectFourGameWindow());
     }
     else if (button_name == "ABOUT") {
-      new ConnectFourAboutWindow();
+      System.out.println("About button was pressed!");
     }
     else if (button_name == "ONLINE_PLAY") {
       System.out.println("Online play button was pressed!");
