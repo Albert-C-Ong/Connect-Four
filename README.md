@@ -2,7 +2,7 @@
 A board game built for CS 151.
 
 <p align="center">
-  <img width="500" src="https://raw.githubusercontent.com/Anferensis/Connect-Four/master/images/ConnectFour_icon_and_logo.png">
+  <img width="300" src="https://raw.githubusercontent.com/Anferensis/Connect-Four/master/images/ConnectFour_icon_and_logo.png">
 </p>
 
 ## Technologies and Tools
