@@ -17,6 +17,7 @@ A board game built for CS 151.
 
 **Et Cetera**
 * [GitHub](https://github.com/) // Version Control
+* [Eclipse](https://www.eclipse.org/) // IDE
 
 ## Acknowledgement
 ConnectFour was created by [Krish Ghiya](https://github.com/krishghiya), [Holly Lind](https://github.com/hollylind), and [Albert Ong](https://github.com/Anferensis).
