@@ -8,7 +8,7 @@ package edu.sjsu.cs.cs151.connectfour.Model;
  * A class that deals with the game mechanics of Connect Four.
  * 
  * @author Holly Lind
- * @since 3/15/2019
+ * @since 3/23/2019
  */
 public class ConnectFourGame {
 
@@ -156,19 +156,19 @@ public class ConnectFourGame {
 	// * * * * 
 	private boolean checkWinHorizontal(int column, int row, String sameColor) {
 		if (column == 0)
-			return checkWinHorizontalHelper(1, row, sameColor);
+			return checkWinHorizontalHelper(0, row, sameColor);
 		else if (column == 1)
 			return checkWinHorizontalHelper(0, row, sameColor) ||
-					checkWinHorizontalHelper(2, row, sameColor);
+					checkWinHorizontalHelper(1, row, sameColor);
 		else if (column == 2)
 			return checkWinHorizontalHelper(0, row, sameColor) ||
 					checkWinHorizontalHelper(1, row, sameColor) ||
-					checkWinHorizontalHelper(3, row, sameColor);
+					checkWinHorizontalHelper(2, row, sameColor);
 		else if (column == 3)
 			return checkWinHorizontalHelper(0, row, sameColor) ||
 					checkWinHorizontalHelper(1, row, sameColor) ||
 					checkWinHorizontalHelper(2, row, sameColor) ||
-					checkWinHorizontalHelper(4, row, sameColor);
+					checkWinHorizontalHelper(3, row, sameColor);
 		else if (column == 4)
 			return checkWinHorizontalHelper(1, row, sameColor) ||
 					checkWinHorizontalHelper(2, row, sameColor) ||
