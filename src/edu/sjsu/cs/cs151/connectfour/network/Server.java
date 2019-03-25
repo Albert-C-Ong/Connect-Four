@@ -22,21 +22,6 @@ public class Server extends ConnectFourGameWindow  {
 	public Server() {
 		super();
 		setTitle("Player 1");
-//		userText = new JTextField();
-//		userText.setEditable(false);
-//		userText.addActionListener(
-//			new ActionListener(){
-//				public void actionPerformed(ActionEvent event) {
-//					sendMessage(event.getActionCommand());
-//					userText.setText("");
-//				}
-//			}
-//		);
-//		add(userText, BorderLayout.NORTH);
-//		chatWindow = new JTextArea();
-//		add(new JScrollPane(chatWindow));
-//		setSize(300, 150); //Sets the window size
-//		setVisible(true);
 		System.out.println("Set up Successfully");
 	}
 	
@@ -48,12 +33,10 @@ public class Server extends ConnectFourGameWindow  {
 		System.out.println(result);
 		if (result.substring(0, 12).equals("piece placed")) {
 	        y_coord = Integer.parseInt(result.substring(19));
-	        //drawNewPiece(current_player, x_coord, y_coord);
 	      }
 	      
 	      else if (result.substring(0, 3).equals("win")) {
 	        y_coord = Integer.parseInt(result.substring(13));
-	        //drawNewPiece(current_player, x_coord, y_coord);
 	    	winnerDialogBox();
 	    	return;
 	    }
@@ -98,10 +81,8 @@ public class Server extends ConnectFourGameWindow  {
 		System.out.println("Streams are now setup on Server");
 	}
 	
-	//during the chat conversation
+	//during the game
 	private void whilePlaying() throws IOException{
-//		sendMessage(message);
-//		ableToType(true);
 		do{
 			try{
 				String loc =(String) input.readObject();
@@ -117,7 +98,6 @@ public class Server extends ConnectFourGameWindow  {
 	
 	public void closeConnection(){
 		System.out.println("Closing connections on server...");
-//		ableToType(false);
 		try{
 			output.close(); //Closes the output path to the client
 			input.close(); //Closes the input path to the server, from the client.
@@ -138,7 +118,7 @@ public class Server extends ConnectFourGameWindow  {
 		}
 	}
 	
-	//update chatWindow
+	//update board
 	private void showMove(Button update, String color){
 		SwingUtilities.invokeLater(
 			new Runnable(){
