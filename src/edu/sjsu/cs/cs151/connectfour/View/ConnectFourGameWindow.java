@@ -15,12 +15,8 @@ import edu.sjsu.cs.cs151.connectfour.Model.*;
  * Game window for Connect Four. Creates UI elements.
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 3/18/2019
+ * @since 3/27/2019
  * 
- * TODO:
- *   Add timer for Player 1/Player 2 turns. 
- *   Indicate who's turn it is. 
- *   checkTie() 
  */
 public class ConnectFourGameWindow extends JFrame implements ActionListener {
 
@@ -97,7 +93,14 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
 			y_coord = Integer.parseInt(result.substring(13));
 			drawNewPiece(current_player, x_coord, y_coord);
 			
-			winnerDialogBox();
+			openDialogBox(game.getCurrentPlayer() + " wins!");
+		}
+		
+		else if (result.substring(0, 3).equals("tie")) {
+			y_coord = Integer.parseInt(result.substring(10, 11));
+			drawNewPiece(current_player, x_coord, y_coord);
+			
+			openDialogBox("Tie!");
 		}
 	}
 	
@@ -124,12 +127,12 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
 	
 	// displays message after someone wins
 	// after closing dialog box, prompts for new game
-	private void winnerDialogBox() {
+	private void openDialogBox(String message) {
 		Font message_font = new Font("Arial", Font.BOLD, 60);
 		
-		JLabel winner_message = new JLabel(game.getCurrentPlayer() + " wins!");
-	    winner_message.setFont(message_font);
-	    JOptionPane.showMessageDialog(this, winner_message);
+		JLabel initial_message = new JLabel(message);
+	    initial_message.setFont(message_font);
+	    JOptionPane.showMessageDialog(this, initial_message);
 		
 	    JLabel play_again_message = new JLabel("Play again?");
 	    play_again_message.setFont(message_font);

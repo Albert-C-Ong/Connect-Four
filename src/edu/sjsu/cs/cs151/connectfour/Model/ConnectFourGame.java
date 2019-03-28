@@ -8,7 +8,7 @@ package edu.sjsu.cs.cs151.connectfour.Model;
  * A class that deals with the game mechanics of Connect Four.
  * 
  * @author Holly Lind
- * @since 3/23/2019
+ * @since 3/27/2019
  */
 public class ConnectFourGame {
 
@@ -43,13 +43,17 @@ public class ConnectFourGame {
 			return "chosen column is full";
 		
 		board.setTile(columnSelected, rowSelected, player);
-		if (!checkWin(columnSelected, rowSelected)) {
-			changePlayer();
-			return "piece placed at " + columnSelected + ", " + rowSelected;
-		}
-		else {
+		if (checkWin(columnSelected, rowSelected)) {
 			activeGame = false;
 			return "winner at " + columnSelected + ", " + rowSelected;
+		}
+		else if (checkTie()) {
+			activeGame = false;
+			return "tie at " + columnSelected + ", " + rowSelected + "  ";
+		}
+		else {
+			changePlayer();
+			return "piece placed at " + columnSelected + ", " + rowSelected;
 		}
 	}
 	
@@ -75,6 +79,19 @@ public class ConnectFourGame {
 				checkWinLeftDiagonal(column, row, color) || checkWinRightDiagonal(column, row, color);
 	}
 	
+	
+	/**
+	 * checks if Board is full
+	 * @return true if Board is full; else false
+	 */
+	public boolean checkTie() {
+		boolean fullBoard = true;
+		for (int i = 0; i < Board.getColumns(); i++)
+			fullBoard = fullBoard && (board.checkColumnPlacement(i) == 6);
+		  
+		return fullBoard;
+	}
+	  
 	
 	/**
 	 * resets Connect Four Game (for new game)
