@@ -10,7 +10,12 @@
  * @author Holly Lind
  * @since 27.03.2019
  */
-	
+
+package edu.sjsu.cs.cs151.connectfour.Model;
+
+
+public class ConnectFourGame {
+  
 	/**
 	 * creates Connect Four game
 	 * keeps track of game mechanics
