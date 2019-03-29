@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="930.50237"
-     inkscape:cy="559.52458"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="615.14973"
+     inkscape:cy="690.67762"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -210,7 +210,7 @@
            height="430"
            x="275.71429"
            y="242.85715" /></flowRegion><flowPara
-         id="flowPara4203"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4203" /></flowRoot>    <flowRoot
        transform="matrix(0.31257925,0,0,0.32474005,39.109493,60.345899)"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1;font-family:'MS PGothic';-inkscape-font-specification:'MS PGothic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:1.34959292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="flowRoot4493-3-9"
@@ -224,11 +224,15 @@
            width="893.97437"
            id="rect4487-5-0" /></flowRegion><flowPara
          id="flowPara4491-6-1"
-         style="line-height:1">Suspendisse a scelerisque lacus, placerat bibendum lectus. Etiam lobortis fermentum lacus vitae sodales. Suspendisse vitae leo malesuada, viverra metus et, accumsan lacus. Suspendisse nec mollis nisl. Sed vehicula volutpat auctor. Proin quis tortor ac ex iaculis viverra at non nisi.</flowPara><flowPara
+         style="line-height:1">Connect Four is a group project created for </flowPara><flowPara
          style="line-height:1"
-         id="flowPara4400"> </flowPara><flowPara
+         id="flowPara4400">CS 151: Object-Oriented Design. The goal of the game is connect four pieces in a row, either vertically, horizontally, or diagonally. Bug reports can be sent to  (insert email address)@email.com.</flowPara><flowPara
          style="line-height:1"
-         id="flowPara4398">Written by Krish Ghiya, Holly Lind, and Albert Ong.</flowPara></flowRoot>    <flowRoot
+         id="flowPara4398" /><flowPara
+         style="line-height:1"
+         id="flowPara3224">Current version: 25 March, 2019</flowPara><flowPara
+         style="line-height:1"
+         id="flowPara3220">Written by Krish Ghiya, Holly Lind, and Albert Ong. </flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4390"
        style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
@@ -238,7 +242,7 @@
            height="100"
            x="1768.5714"
            y="1028.5714" /></flowRegion><flowPara
-         id="flowPara4396"></flowPara></flowRoot>    <path
+         id="flowPara4396" /></flowRoot>    <path
        style="fill:none;stroke:#ff2a2a;stroke-width:1.32291675;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 69.758851,54.428574 H 353.57449"
        id="path4402"
@@ -253,7 +257,7 @@
        y="260.6528"
        ry="3.124208" />
     <rect
-       style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.5430885;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#ff2a2a;stroke-width:0.5430885;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4949"
        width="312.14493"
        height="161.57047"
@@ -261,6 +265,25 @@
        y="16.822973"
        ry="0"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
-  </g>
+       inkscape:export-ydpi="96"
+       inkscape:export-filename="C:\Users\alber\eclipse-workspace\Connect Four\images\ConnectFourAboutWindow_text.png" />
+    <flowRoot
+       transform="matrix(0.31257926,0,0,0.32474004,-353.98575,60.3459)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1;font-family:'MS PGothic';-inkscape-font-specification:'MS PGothic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:1.34959292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="flowRoot4493-3-9-0"
+       xml:space="preserve"><flowRegion
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1;font-family:'MS PGothic';-inkscape-font-specification:'MS PGothic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:1.34959292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="flowRegion4489-9-7-1"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1;font-family:'MS PGothic';-inkscape-font-specification:'MS PGothic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:1.34959292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           y="12.857143"
+           x="113.21429"
+           height="349.87656"
+           width="893.97437"
+           id="rect4487-5-0-3" /></flowRegion><flowPara
+         id="flowPara4491-6-1-4"
+         style="line-height:1">Suspendisse a scelerisque lacus, placerat bibendum lectus. Etiam lobortis fermentum lacus vitae sodales. Suspendisse vitae leo malesuada, viverra metus et, accumsan lacus. Suspendisse nec mollis nisl. Sed vehicula volutpat auctor. Proin quis tortor ac ex iaculis viverra at non nisi.</flowPara><flowPara
+         style="line-height:1"
+         id="flowPara4400-1"> </flowPara><flowPara
+         style="line-height:1"
+         id="flowPara4398-7">Written by Krish Ghiya, Holly Lind, and Albert Ong.</flowPara></flowRoot>  </g>
 </svg>
