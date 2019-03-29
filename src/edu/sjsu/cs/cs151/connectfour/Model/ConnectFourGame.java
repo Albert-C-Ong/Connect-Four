@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.connectfour.Model;
+
 
 /** ConnectFourGame.java
  * 
@@ -8,10 +8,8 @@ package edu.sjsu.cs.cs151.connectfour.Model;
  * A class that deals with the game mechanics of Connect Four.
  * 
  * @author Holly Lind
- * @since 3/27/2019
+ * @since 27.03.2019
  */
-public class ConnectFourGame {
-
 	
 	/**
 	 * creates Connect Four game
@@ -292,7 +290,4 @@ public class ConnectFourGame {
 				board.getTile(column + 2, row + 2).getColor().equals(sameColor) &&
 				board.getTile(column + 3, row + 3).getColor().equals(sameColor);
 	}
-	
-	
-
 }
