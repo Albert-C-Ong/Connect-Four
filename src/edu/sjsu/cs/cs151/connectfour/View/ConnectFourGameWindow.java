@@ -119,6 +119,11 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
       
       openDialogBox("Tie!", "Tie");
     }
+    
+    // If the game ends in a tie...
+    else if (result.startsWith("tie")) {
+      System.out.println("The game is a tie!"); // need to implement functionality later.
+    }
   }
   
   
@@ -192,5 +197,4 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
       this.parent.viewMenuWindow(); // Returns to the menu window. 
     }
   }
-  
 }

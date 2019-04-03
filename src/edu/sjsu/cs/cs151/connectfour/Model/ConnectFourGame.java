@@ -7,10 +7,15 @@
  * 
  * A class that deals with the game mechanics of Connect Four.
  * 
- * @author Holly Lind
- * @since 27.03.2019
+ * @author Holly Lind and Albert Ong
+ * @since 29.03.2019
  */
-	
+
+package edu.sjsu.cs.cs151.connectfour.Model;
+
+
+public class ConnectFourGame {
+  
 	/**
 	 * creates Connect Four game
 	 * keeps track of game mechanics
@@ -31,16 +36,21 @@
 	 * @return String indicating state of game
 	 */
 	public String oneTurn(String player, int columnSelected) {
-		if (!activeGame)
+		if (!activeGame) {
 			return "game is already over";
-		else if (!player.equals(current_player))
+		}
+		else if (!player.equals(current_player)) {
 			return "wrong player; should be other player's turn";
-		
+		}
+			
 		int rowSelected = board.checkColumnPlacement(columnSelected);
-		if (rowSelected == 6)
+		
+		if (rowSelected == 6) {
 			return "chosen column is full";
+		}
 		
 		board.setTile(columnSelected, rowSelected, player);
+		
 		if (checkWin(columnSelected, rowSelected)) {
 			activeGame = false;
 			return "winner at " + columnSelected + ", " + rowSelected;
