@@ -1,4 +1,3 @@
-
 /** ConnectFourGameWindow.java
  * 
  * CS 151 Spring 2019
@@ -11,7 +10,6 @@
  * 
  * TODO:
  *   Indicate who's turn it is. 
- *   checkTie() 
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -111,7 +109,15 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
       y_coord = Integer.parseInt(result.substring(13));
       drawNewPiece(current_player, x_coord, y_coord);
       
-      winnerDialogBox();
+      openDialogBox(game.getCurrentPlayer() + " wins!", "Winner");
+    }
+    
+    // If the game ends in a tie...
+    else if (result.startsWith("tie")) {
+      y_coord = Integer.parseInt(result.substring(10, 11));
+      drawNewPiece(current_player, x_coord, y_coord);
+      
+      openDialogBox("Tie!", "Tie");
     }
     
     // If the game ends in a tie...
@@ -135,24 +141,24 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   
-  /** Displays message after someone wins after closing dialog box, 
-   * prompts for new game
+  /** Displays message after game ends 
+   * after closing dialog box, prompts for new game
    */
-  private void winnerDialogBox() {
+  private void openDialogBox(String message, String messageLabel) {
     
     // Styles the message font and color. 
     Font message_font = new Font("Arial", Font.BOLD, 60);
     Color message_color = new Color(255, 42, 42);
     
     // Applies the style to the winner message. 
-    JLabel winner_message = new JLabel(game.getCurrentPlayer() + " wins!");
-    winner_message.setFont(message_font);
-    winner_message.setForeground(message_color);
+    JLabel initial_message = new JLabel(message);
+    initial_message.setFont(message_font);
+    initial_message.setForeground(message_color);
     
     // Displays the winner message dialog. 
     JOptionPane.showOptionDialog(this, 
-                                 winner_message, 
-                                 "Winner", 
+                                 initial_message, 
+                                 messageLabel, 
                                  JOptionPane.OK_OPTION, 
                                  JOptionPane.INFORMATION_MESSAGE, 
                                  new ImageIcon(), 
@@ -191,5 +197,4 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
       this.parent.viewMenuWindow(); // Returns to the menu window. 
     }
   }
-  
 }
