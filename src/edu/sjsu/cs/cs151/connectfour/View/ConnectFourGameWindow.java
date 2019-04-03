@@ -6,7 +6,7 @@
  * Game window for Connect Four. Creates UI elements.
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 29.03.2019
+ * @since 03.04.2019
  * 
  * TODO:
  *   Indicate who's turn it is. 
