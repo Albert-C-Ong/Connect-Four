@@ -13,7 +13,6 @@
 
 package edu.sjsu.cs.cs151.connectfour.Model;
 
-import java.io.Serializable;
 
 public class Tile {
 
