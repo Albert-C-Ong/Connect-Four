@@ -1,4 +1,3 @@
-
 /** ConnectFourGameWindow.java
  * 
  * CS 151 Spring 2019
@@ -7,12 +6,10 @@
  * Game window for Connect Four. Creates UI elements.
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 23.03.2019
+ * @since 03.04.2019
  * 
  * TODO:
- *   Add timer for Player 1/Player 2 turns. 
  *   Indicate who's turn it is. 
- *   checkTie() 
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -24,42 +21,32 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
-public class ConnectFourGameWindow extends JFrame implements ActionListener {
+public class ConnectFourGameWindow extends JPanel implements ActionListener {
 
+  // A variable that stores the parent window. 
+  private ConnectFourMainWindow parent; 
+  
+  // A two-dimensional array that stores the grid of buttons. 
   private ArrayList<ArrayList<Button>> buttons;
   
   // Retrieves the current working directory. 
+  // This is used primarily for accessing image files. 
   private String cwd = System.getProperty("user.dir");
   
   // Creates a game object. 
-  public ConnectFourGame game;
+  private ConnectFourGame game;
   
-  public String result;
   
   /** Constructor for the ConnectFourGameWindow. 
    * initializes game window
    * @postcondition window is created with blank board
    */
-  public ConnectFourGameWindow() {
+  public ConnectFourGameWindow(ConnectFourMainWindow parent) {
     
     // Initializes variables
+    this.parent = parent;
     buttons = new ArrayList<ArrayList<Button>>();
     game = new ConnectFourGame();
-    
-    // Sets title, dimension, and background color of the window. 
-    //setTitle(window);
-    setSize(new Dimension(1600, 900));
-    setResizable(false);
-    getContentPane().setBackground(Color.WHITE);
-    
-    // Sets the window icon. 
-    ImageIcon icon = new ImageIcon(cwd + "\\images\\window_icon.png");
-    setIconImage(icon.getImage());
-    
-    // Sets the background image. 
-    JLabel background = new JLabel();
-    background.setIcon(new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png"));
-    setContentPane(background);
     
     // Sets the button layout. 
     GridBagLayout layout = new GridBagLayout();
@@ -92,37 +79,55 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
     setVisible(true);
   }
   
-  public ConnectFourGame getGame() {
-	  return game;
+  
+  /* Draws the background image. */
+  public void paintComponent(Graphics g) {
+    Image background = new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png").getImage();
+    g.drawImage(background, 0, -18, null);
   }
   
-  /** The method that activates whenever a button is pressed. */
+  
+  /* The method that activates whenever a button is pressed. */
   public void actionPerformed(ActionEvent event) {
     
     // Retrieves the button that was pressed. 
-    //Button button = (Button) event.getSource();
+    Button button = (Button) event.getSource();
     
-    //int x_coord = button.getXCoord();
-    //int y_coord;
+    int x_coord = button.getXCoord();
+    int y_coord = button.getYCoord();
+    String current_player = game.getCurrentPlayer();
     
-    //String current_player = game.getCurrentPlayer();
+    String result = game.oneTurn(current_player, x_coord);
     
-    //result = game.oneTurn(current_player, x_coord);
+    if (result.startsWith("piece placed")) {
+      y_coord = Integer.parseInt(result.substring(19));
+      drawNewPiece(current_player, x_coord, y_coord);
+    }
     
-//    if (result.substring(0, 12).equals("piece placed")) {
-//        //y_coord = Integer.parseInt(result.substring(19));
-//        //drawNewPiece(current_player, x_coord, y_coord);
-//      }
-//      
-//      else if (result.substring(0, 3).equals("win")) {
-//        //y_coord = Integer.parseInt(result.substring(13));
-//        //drawNewPiece(current_player, x_coord, y_coord);
-//    	winnerDialogBox();
-//    }
+    // If a player wins...
+    else if (result.startsWith("win")) {
+      y_coord = Integer.parseInt(result.substring(13));
+      drawNewPiece(current_player, x_coord, y_coord);
+      
+      openDialogBox(game.getCurrentPlayer() + " wins!", "Winner");
+    }
+    
+    // If the game ends in a tie...
+    else if (result.startsWith("tie")) {
+      y_coord = Integer.parseInt(result.substring(10, 11));
+      drawNewPiece(current_player, x_coord, y_coord);
+      
+      openDialogBox("Tie!", "Tie");
+    }
+    
+    // If the game ends in a tie...
+    else if (result.startsWith("tie")) {
+      System.out.println("The game is a tie!"); // need to implement functionality later.
+    }
   }
   
   
-  // draws a piece that's just been placed
+  /* Draws a piece that's just been placed */
   public void drawNewPiece(String current_player, int x_coord, int y_coord) {
     String icon_path;
     Button button = buttons.get(x_coord).get(y_coord);
@@ -136,41 +141,64 @@ public class ConnectFourGameWindow extends JFrame implements ActionListener {
   }
   
   
-  /** Displays message after someone wins after closing dialog box, 
-   * prompts for new game
-   */	
-  public void winnerDialogBox() {
+  /** Displays message after game ends 
+   * after closing dialog box, prompts for new game
+   */
+  public void openDialogBox(String message, String messageLabel) {
     
-    // Styles the message font. 
+    // Styles the message font and color. 
     Font message_font = new Font("Arial", Font.BOLD, 60);
+    Color message_color = new Color(255, 42, 42);
     
-    // Displays the winner message. 
-    JLabel winner_message = new JLabel(game.getCurrentPlayer() + " wins!");
-    winner_message.setFont(message_font);
-    JOptionPane.showMessageDialog(this, winner_message);
+    // Applies the style to the winner message. 
+    JLabel initial_message = new JLabel(message);
+    initial_message.setFont(message_font);
+    initial_message.setForeground(message_color);
     
-    // Promps the player to play again. 
+    // Displays the winner message dialog. 
+    JOptionPane.showOptionDialog(this, 
+                                 initial_message, 
+                                 messageLabel, 
+                                 JOptionPane.OK_OPTION, 
+                                 JOptionPane.INFORMATION_MESSAGE, 
+                                 new ImageIcon(), 
+                                 new String[] {"Ok"}, 
+                                 null); 
+    
+    // Applies the style to the play again message.  
     JLabel play_again_message = new JLabel("Play again?");
     play_again_message.setFont(message_font);
-    int play_again = JOptionPane.showConfirmDialog(this, play_again_message, null, JOptionPane.YES_NO_OPTION);
+    play_again_message.setForeground(message_color);
     
-    // If the yes button was pressed...
-    if (play_again == JOptionPane.YES_OPTION) {
-      
-        // Resets the game logic. 
-        game.newGame();
-        for (int x = 0; x < Board.getColumns(); x++) {
-          for (int y = 0; y < Board.getRows(); y++) {
-            Button currentButton = buttons.get(x).get(y);
-            currentButton.setIcon(new ImageIcon());
-          }
-        }
+    // Prompts the player to play again. 
+    int play_again = 
+        JOptionPane.showOptionDialog(this, 
+                                     play_again_message, 
+                                     "Play again?", 
+                                     JOptionPane.YES_NO_OPTION, 
+                                     JOptionPane.INFORMATION_MESSAGE, 
+                                     new ImageIcon(), 
+                                     new String[] {"Yes", "No"}, 
+                                     null); 
+    
+    // Resets the game logic. 
+    game.newGame();
+    
+    // Clears all of the button icons. 
+    for (int x = 0; x < Board.getColumns(); x++) {
+      for (int y = 0; y < Board.getRows(); y++) {
+        Button currentButton = buttons.get(x).get(y);
+        currentButton.setIcon(new ImageIcon());
+      }
     }
     
     // If the no button was pressed...
-    else {
-      dispose(); // Closes the window. 
+    if (play_again == JOptionPane.NO_OPTION){
+      this.parent.viewMenuWindow(); // Returns to the menu window. 
     }
   }
   
+  public ConnectFourGame getGame() {
+	  return game;
+  }
 }

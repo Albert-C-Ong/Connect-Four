@@ -7,10 +7,7 @@
  * About window for Connect Four. 
  * 
  * @author Albert Ong
- * @since 23.03.2019
- * 
- * TODO:
- *   Implement functionality for play, online play, and about buttons. 
+ * @since 27.03.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -20,23 +17,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class ConnectFourAboutWindow extends JFrame implements ActionListener {
+
+public class ConnectFourAboutWindow extends JPanel implements ActionListener {
   
   // Retrieves the current working directory. 
   // This is used primarily for accessing image files. 
   private String cwd = System.getProperty("user.dir");
   
-  public ConnectFourAboutWindow() {
+  public ConnectFourAboutWindow(ConnectFourMainWindow parent) {
     
-    // Assigns the title, size, and background color of the window. 
-    setTitle("Connect Four");
-    setSize(new Dimension(1600, 900));
-    setResizable(false);
-    getContentPane().setBackground(Color.WHITE);
-    
-    // Retrieves and sets the window icon. 
-    ImageIcon icon = new ImageIcon(cwd + "\\images\\window_icon.png");
-    setIconImage(icon.getImage());
+    setBackground(Color.WHITE);
     
     // Adds the grid layout and sets the constraints. 
     GridBagLayout layout = new GridBagLayout();
@@ -50,12 +40,13 @@ public class ConnectFourAboutWindow extends JFrame implements ActionListener {
     JLabel text = new JLabel(new ImageIcon(cwd + "\\images\\ConnectFourAboutWindow_text.png"));
     add(text, gbc);
     
-    // Creats the okay button. 
+    // Creates the okay button. 
     JButton button = new JButton();
+    button.setName("ABOUT_OKAY");
     button.setPreferredSize(new Dimension(400, 80));
     button.setIcon(new ImageIcon(cwd + "\\images\\menu_button_okay_deselect.png"));
     button.setRolloverIcon(new ImageIcon(cwd + "\\images\\menu_button_okay_select.png"));
-    button.addActionListener(this);
+    button.addActionListener(parent);
     
     // Makes the border and content of the button opqaue. 
     button.setOpaque(false);
@@ -73,7 +64,7 @@ public class ConnectFourAboutWindow extends JFrame implements ActionListener {
     
     // Retrieves the button object that was pressed. 
     JButton button = (JButton)event.getSource();
-    dispose();
+    System.exit(0);
   }
 
 }
