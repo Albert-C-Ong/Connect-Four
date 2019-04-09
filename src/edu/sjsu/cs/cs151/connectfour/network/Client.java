@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import edu.sjsu.cs.cs151.connectfour.View.Button;
 import edu.sjsu.cs.cs151.connectfour.View.ConnectFourGameWindow;
+import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
 
 public class Client extends ConnectFourGameWindow{
 	
@@ -21,9 +22,8 @@ public class Client extends ConnectFourGameWindow{
 	private Socket connection;
 	
 	//constructor
-	public Client(String host){
-		super();
-		setTitle("Player 2");
+	public Client(String host, ConnectFourMainWindow parent){
+		super(parent);
 		serverIP = host;
 //		userText = new JTextField();
 //		userText.setEditable(false);
@@ -44,25 +44,29 @@ public class Client extends ConnectFourGameWindow{
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		super.actionPerformed(event);
 		int y_coord = 0;
 		int x = ((Button) event.getSource()).getXCoord();
-		result = game.oneTurn("Player 2", x);
-		System.out.println(result);
-		if (result.substring(0, 12).equals("piece placed")) {
-	        y_coord = Integer.parseInt(result.substring(19));
-	        //drawNewPiece(current_player, x_coord, y_coord);
-	      }
-	      
-	      else if (result.substring(0, 3).equals("win")) {
-	        y_coord = Integer.parseInt(result.substring(13));
-	        //drawNewPiece(current_player, x_coord, y_coord);
-	    	winnerDialogBox();
-	    	return;
-	    }
+		
+		String result = getGame().oneTurn("Player 2", x);
+		//System.out.println(result);
+		
+		if(result.equals("wrong player; should be other player's turn")) return;
+		
+		boolean won = false;
+		
+		if (result.startsWith("piece placed")) {
+		      y_coord = Integer.parseInt(result.substring(19));
+		}
+	     
+		else if (result.startsWith("win")) {
+		      y_coord = Integer.parseInt(result.substring(13));
+		}
+		
 		event.setSource(new Button(x, y_coord));
 		sendMove((Button) event.getSource());
-		ConnectFourGameTest.printBoard(game.board);
+		
+		if(won) openDialogBox("Player 2" + " wins!", "Winner");
+		//ConnectFourGameTest.printBoard(game.board);
 	}
 	
 	//connect to server
@@ -102,10 +106,10 @@ public class Client extends ConnectFourGameWindow{
 //		ableToType(true);
 		do{
 			try{
-				String loc =(String) input.readObject();
+				String loc = (String) input.readObject();
 				int x = Integer.parseInt(loc.substring(0, loc.indexOf(",")));
 				int y = Integer.parseInt(loc.substring(loc.indexOf(",")+1));
-				game.oneTurn("Player 1", x);
+				getGame().oneTurn("Player 1", x);
 				showMove(new Button(x, y), "Player 1");
 			}catch(ClassNotFoundException classNotFoundException){
 				//showMessage("The user has sent an unknown object!");

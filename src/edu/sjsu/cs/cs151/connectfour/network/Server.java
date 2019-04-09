@@ -7,6 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import edu.sjsu.cs.cs151.connectfour.View.ConnectFourGameWindow;
+import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
 import edu.sjsu.cs.cs151.connectfour.View.Button;
 
 public class Server extends ConnectFourGameWindow  {
@@ -18,31 +19,41 @@ public class Server extends ConnectFourGameWindow  {
 	private ServerSocket server;
 	private Socket connection;
 	
+	private ConnectFourMainWindow parent;
+	
 	//constructor
-	public Server() {
-		super();
-		setTitle("Player 1");
+	public Server(ConnectFourMainWindow parent) {
+		super(parent);
+		this.parent = parent;
 		System.out.println("Set up Successfully");
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		super.actionPerformed(event);
 		int x = ((Button) event.getSource()).getXCoord();
 		int y_coord = 0;
-		result = game.oneTurn("Player 1", x);
-		System.out.println(result);
-		if (result.substring(0, 12).equals("piece placed")) {
-	        y_coord = Integer.parseInt(result.substring(19));
-	      }
-	      
-	      else if (result.substring(0, 3).equals("win")) {
-	        y_coord = Integer.parseInt(result.substring(13));
-	    	winnerDialogBox();
-	    	return;
-	    }
+		
+		System.out.println("Button!");
+		
+		String result = getGame().oneTurn("Player 1", x);
+		//System.out.println(result);
+		
+		if(result.equals("wrong player; should be other player's turn")) return;
+		
+		boolean won = false;
+		
+		if (result.startsWith("piece placed")) {
+		      y_coord = Integer.parseInt(result.substring(19));
+		}
+	     
+		else if (result.startsWith("win")) {
+		      y_coord = Integer.parseInt(result.substring(13));
+		}
+		
 		event.setSource(new Button(x, y_coord));
 		sendMove((Button) event.getSource());
-		ConnectFourGameTest.printBoard(game.board);
+		
+		if(won) openDialogBox("Player 1" + " wins!", "Winner");
+		//ConnectFourGameTest.printBoard(game.board);
 	}
 	
 	public void startRunning(){
@@ -55,7 +66,7 @@ public class Server extends ConnectFourGameWindow  {
 					setupStreams();
 					whilePlaying();
 					System.out.println("Started running on Server");
-				}catch(EOFException eofException){
+//				}catch(EOFException eofException){
 					//showMessage("\n Server ended the connection! ");
 				} finally{
 					closeConnection(); //Changed the name to something more appropriate
@@ -85,10 +96,10 @@ public class Server extends ConnectFourGameWindow  {
 	private void whilePlaying() throws IOException{
 		do{
 			try{
-				String loc =(String) input.readObject();
+				String loc = (String) input.readObject();
 				int x = Integer.parseInt(loc.substring(0, loc.indexOf(",")));
 				int y = Integer.parseInt(loc.substring(loc.indexOf(",")+1));
-				game.oneTurn("Player 2", x);
+				getGame().oneTurn("Player 2", x);
 				showMove(new Button(x, y), "Player 2");
 			}catch(ClassNotFoundException classNotFoundException){
 				//showMessage("The user has sent an unknown object!");
