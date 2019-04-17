@@ -20,4 +20,4 @@ A board game built for CS 151.
 * [Eclipse](https://www.eclipse.org/) // IDE
 
 ## Acknowledgement
-ConnectFour was created by [Krish Ghiya](https://github.com/krishghiya), [Holly Lind](https://github.com/hollylind), and [Albert Ong](https://github.com/Anferensis).
+Connect Four was created by [Krish Ghiya](https://github.com/krishghiya), [Holly Lind](https://github.com/hollylind), and [Albert Ong](https://github.com/Anferensis).
