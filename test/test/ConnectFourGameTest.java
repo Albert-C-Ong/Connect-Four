@@ -18,19 +18,19 @@ import edu.sjsu.cs.cs151.connectfour.Model.*;
 public class ConnectFourGameTest {
 
 	// runs a Scanner to take user input
-	public static void readInput(ConnectFourGame game)
+	public static void readInput(Model game)
 	{
 		Scanner in = new Scanner(System.in);
 		String input = in.next();
 		
 		if (input.equals("p1"))
 		{
-			System.out.println(game.oneTurn(ConnectFourGame.getPlayerOne(), in.nextInt()));
+			System.out.println(game.oneTurn(Model.getPlayerOne(), in.nextInt()));
 			printBoard(game.getBoard());
 		}
 		else if (input.equals("p2"))
 		{
-			System.out.println(game.oneTurn(ConnectFourGame.getPlayerTwo(), in.nextInt()));
+			System.out.println(game.oneTurn(Model.getPlayerTwo(), in.nextInt()));
 			printBoard(game.getBoard());
 		}
 		else if (input.equals("newgame") || input.equals("reset"))
@@ -56,11 +56,11 @@ public class ConnectFourGameTest {
 		{
 			for (int column = 0; column < Board.getColumns(); column++)
 			{
-				if (!board.get(column).get(row).getFilled())
+				if (!board.getTile(column, row).getFilled())
 					System.out.print("* ");
-				else if (board.get(column).get(row).getColor().equals(Board.getPlayerOneColor()))
+				else if (board.getTile(column, row).getColor().equals(Board.getPlayerOneColor()))
 					System.out.print("x ");
-				else if (board.get(column).get(row).getColor().equals(Board.getPlayerTwoColor()))
+				else if (board.getTile(column, row).getColor().equals(Board.getPlayerTwoColor()))
 					System.out.print("o ");
 				else
 					System.out.print("? ");
@@ -85,7 +85,7 @@ public class ConnectFourGameTest {
 	
 	public static void main(String[] args)
 	{
-		ConnectFourGame game = new ConnectFourGame();
+		Model game = new Model();
 		startGame();
 		printBoard(game.getBoard());
 		

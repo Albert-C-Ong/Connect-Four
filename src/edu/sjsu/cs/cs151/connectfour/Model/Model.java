@@ -1,27 +1,27 @@
 
 
-/** ConnectFourGame.java
+/** Model.java
  * 
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
- * A class that deals with the game mechanics of Connect Four.
+ * A class that deals with the model of Connect Four.
  * 
  * @author Holly Lind and Albert Ong
- * @since 29.03.2019
+ * @since 17.04.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.Model;
 
 
-public class ConnectFourGame {
+public class Model {
   
 	/**
-	 * creates Connect Four game
+	 * creates Connect Four game's model
 	 * keeps track of game mechanics
 	 * @postcondition Board is initialized, starts with player 1
 	 */
-	public ConnectFourGame() {
+	public Model() {
 		board = new Board();
 		current_player = PLAYER_ONE;
 		activeGame = true;
