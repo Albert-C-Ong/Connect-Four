@@ -1,4 +1,3 @@
-
 /** ConnectFourMainWindow.java
  * 
  * CS 151 Spring 2019
@@ -18,8 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 
-import edu.sjsu.cs.cs151.connectfour.network.Client;
-import edu.sjsu.cs.cs151.connectfour.network.Server;
+import edu.sjsu.cs.cs151.connectfour.network.*;
 
 
 public class ConnectFourMainWindow extends JFrame implements ActionListener {
@@ -105,31 +103,31 @@ public class ConnectFourMainWindow extends JFrame implements ActionListener {
                                    scaled_loading_icon, 
                                    new String[] {"Player 1", "Player 2"}, 
                                    null); 
-      menu_window.setVisible(false);
-      SwingWorker server = null;
+      
+      SwingWorker<Object, Object> server = null;
+      final Network player;
+      
       if(choice == 0) {
     	  Server playerOne = new Server(this);
-    	  add(playerOne);
-    	  server = new SwingWorker(){
-    	        @Override
-    	        protected Object doInBackground() throws Exception {
-    	            playerOne.startRunning();
-    	            return null;
-    	        }
-    	  };
+    	  player = playerOne;
       }
       else if(choice == 1) {
     	  Client playerTwo = new Client("127.0.0.1", this);
-    	  add(playerTwo);
-    	  server = new SwingWorker(){
-    		  @Override
-  	          protected Object doInBackground() throws Exception {
-    			  playerTwo.startRunning();
-  	              return null;
-  	        	}
-    	  };
-  	  
+    	  player = playerTwo;
       }
+      else return;
+      
+      menu_window.setVisible(false);
+      add(player);
+      
+      server = new SwingWorker<Object, Object>(){
+	        @Override
+	        protected Object doInBackground() throws Exception {
+	            player.startRunning();
+	            return null;
+	        }
+	  };
+      
       server.execute();
     }
     

@@ -34,7 +34,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   private String cwd = System.getProperty("user.dir");
   
   // Creates a game object. 
-  public ConnectFourGame game;
+  private ConnectFourGame game;
   
   
   /** Constructor for the ConnectFourGameWindow. 
@@ -76,7 +76,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     }
     
     // Makes the window visible. 
-    //setVisible(true);
+    setVisible(true);
   }
   
   
@@ -128,7 +128,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   
   
   /* Draws a piece that's just been placed */
-  public void drawNewPiece(String current_player, int x_coord, int y_coord) {
+  private void drawNewPiece(String current_player, int x_coord, int y_coord) {
     String icon_path;
     Button button = buttons.get(x_coord).get(y_coord);
     
@@ -144,7 +144,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   /** Displays message after game ends 
    * after closing dialog box, prompts for new game
    */
-  public void openDialogBox(String message, String messageLabel) {
+  private void openDialogBox(String message, String messageLabel) {
     
     // Styles the message font and color. 
     Font message_font = new Font("Arial", Font.BOLD, 60);

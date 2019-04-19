@@ -64,7 +64,7 @@ public class ConnectFourAboutWindow extends JPanel implements ActionListener {
     
     // Retrieves the button object that was pressed. 
     JButton button = (JButton)event.getSource();
-    System.exit(0);
+    dispose();
   }
 
 }
