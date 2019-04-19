@@ -12,47 +12,52 @@ import edu.sjsu.cs.cs151.connectfour.View.Button;
 
 public class Server extends ConnectFourGameWindow  {
 	
-	private JTextField userText;
-	private JTextArea chatWindow;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private ServerSocket server;
 	private Socket connection;
 	
-	private ConnectFourMainWindow parent;
-	
 	//constructor
 	public Server(ConnectFourMainWindow parent) {
 		super(parent);
-		this.parent = parent;
 		System.out.println("Set up Successfully");
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		int x = ((Button) event.getSource()).getXCoord();
-		int y_coord = 0;
 		
-		System.out.println("Button!");
+	    Button button = (Button) event.getSource();
+	    
+	    int x_coord = button.getXCoord();
+	    int y_coord = button.getYCoord();
+	    
+	    String result = game.oneTurn("Player 1", x_coord);
+	    
+	    if (result.startsWith("piece placed")) {
+	      y_coord = Integer.parseInt(result.substring(19));
+	    }
+	    
+	    else if(result.startsWith("wrong player; should be other player's turn")) return;
+	    
+	    // If a player wins...
+	    else if (result.startsWith("win")) {
+	      y_coord = Integer.parseInt(result.substring(13));
+	      openDialogBox(game.getCurrentPlayer() + " wins!", "Winner");
+	    }
+	    
+	    // If the game ends in a tie...
+	    else if (result.startsWith("tie")) {
+	      y_coord = Integer.parseInt(result.substring(10, 11));
+	      openDialogBox("Tie!", "Tie");
+	      return;
+	    }
+	    
+	    // If the game ends in a tie...
+	    else if (result.startsWith("tie")) {
+	      System.out.println("The game is a tie!"); // need to implement functionality later.
+	    }
 		
-		String result = getGame().oneTurn("Player 1", x);
-		//System.out.println(result);
-		
-		if(result.equals("wrong player; should be other player's turn")) return;
-		
-		boolean won = false;
-		
-		if (result.startsWith("piece placed")) {
-		      y_coord = Integer.parseInt(result.substring(19));
-		}
-	     
-		else if (result.startsWith("win")) {
-		      y_coord = Integer.parseInt(result.substring(13));
-		}
-		
-		event.setSource(new Button(x, y_coord));
+		event.setSource(new Button(x_coord, y_coord));
 		sendMove((Button) event.getSource());
-		
-		if(won) openDialogBox("Player 1" + " wins!", "Winner");
 		//ConnectFourGameTest.printBoard(game.board);
 	}
 	
@@ -66,7 +71,7 @@ public class Server extends ConnectFourGameWindow  {
 					setupStreams();
 					whilePlaying();
 					System.out.println("Started running on Server");
-//				}catch(EOFException eofException){
+				}catch(EOFException eofException){
 					//showMessage("\n Server ended the connection! ");
 				} finally{
 					closeConnection(); //Changed the name to something more appropriate
@@ -92,14 +97,15 @@ public class Server extends ConnectFourGameWindow  {
 		System.out.println("Streams are now setup on Server");
 	}
 	
-	//during the game
+	//during the chat conversation
 	private void whilePlaying() throws IOException{
+		setVisible(true);
 		do{
 			try{
-				String loc = (String) input.readObject();
+				String loc =(String) input.readObject();
 				int x = Integer.parseInt(loc.substring(0, loc.indexOf(",")));
 				int y = Integer.parseInt(loc.substring(loc.indexOf(",")+1));
-				getGame().oneTurn("Player 2", x);
+				game.oneTurn("Player 2", x);
 				showMove(new Button(x, y), "Player 2");
 			}catch(ClassNotFoundException classNotFoundException){
 				//showMessage("The user has sent an unknown object!");
@@ -109,6 +115,7 @@ public class Server extends ConnectFourGameWindow  {
 	
 	public void closeConnection(){
 		System.out.println("Closing connections on server...");
+//		ableToType(false);
 		try{
 			output.close(); //Closes the output path to the client
 			input.close(); //Closes the input path to the server, from the client.
@@ -129,7 +136,7 @@ public class Server extends ConnectFourGameWindow  {
 		}
 	}
 	
-	//update board
+	//update chatWindow
 	private void showMove(Button update, String color){
 		SwingUtilities.invokeLater(
 			new Runnable(){

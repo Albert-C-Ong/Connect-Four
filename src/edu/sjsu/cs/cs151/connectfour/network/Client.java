@@ -13,8 +13,6 @@ import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
 
 public class Client extends ConnectFourGameWindow{
 	
-	private JTextField userText;
-	private JTextArea chatWindow;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private String message = "";
@@ -25,47 +23,44 @@ public class Client extends ConnectFourGameWindow{
 	public Client(String host, ConnectFourMainWindow parent){
 		super(parent);
 		serverIP = host;
-//		userText = new JTextField();
-//		userText.setEditable(false);
-//		userText.addActionListener(
-//				new ActionListener(){
-//				public void actionPerformed(ActionEvent event){
-//					sendMessage(event.getActionCommand());
-//					userText.setText("");
-//				}
-//			}
-//		);
-//		add(userText, BorderLayout.NORTH);
-//		chatWindow = new JTextArea();
-//		add(new JScrollPane(chatWindow));
-//		setSize(300, 150); //Sets the window size
-//		setVisible(true);
 		System.out.println("Set Client up Successfully");
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		int y_coord = 0;
-		int x = ((Button) event.getSource()).getXCoord();
 		
-		String result = getGame().oneTurn("Player 2", x);
-		//System.out.println(result);
-		
-		if(result.equals("wrong player; should be other player's turn")) return;
-		
-		boolean won = false;
-		
-		if (result.startsWith("piece placed")) {
-		      y_coord = Integer.parseInt(result.substring(19));
-		}
-	     
-		else if (result.startsWith("win")) {
-		      y_coord = Integer.parseInt(result.substring(13));
-		}
-		
-		event.setSource(new Button(x, y_coord));
+		Button button = (Button) event.getSource();
+	    
+	    int x_coord = button.getXCoord();
+	    int y_coord = button.getYCoord();
+	    
+	    String result = game.oneTurn("Player 2", x_coord);
+	    
+	    if (result.startsWith("piece placed")) {
+	      y_coord = Integer.parseInt(result.substring(19));
+	    }
+	    
+	    else if(result.startsWith("wrong player; should be other player's turn")) return;
+	    
+	    // If a player wins...
+	    else if (result.startsWith("win")) {
+	      y_coord = Integer.parseInt(result.substring(13));
+	      openDialogBox(game.getCurrentPlayer() + " wins!", "Winner");
+	    }
+	    
+	    // If the game ends in a tie...
+	    else if (result.startsWith("tie")) {
+	      y_coord = Integer.parseInt(result.substring(10, 11));
+	      openDialogBox("Tie!", "Tie");
+	      return;
+	    }
+	    
+	    // If the game ends in a tie...
+	    else if (result.startsWith("tie")) {
+	      System.out.println("The game is a tie!"); // need to implement functionality later.
+	    }
+	    
+		event.setSource(new Button(x_coord, y_coord));
 		sendMove((Button) event.getSource());
-		
-		if(won) openDialogBox("Player 2" + " wins!", "Winner");
 		//ConnectFourGameTest.printBoard(game.board);
 	}
 	
@@ -103,13 +98,13 @@ public class Client extends ConnectFourGameWindow{
 	
 	//while chatting with server
 	private void whilePlaying() throws IOException{
-//		ableToType(true);
+		setVisible(true);
 		do{
 			try{
-				String loc = (String) input.readObject();
+				String loc =(String) input.readObject();
 				int x = Integer.parseInt(loc.substring(0, loc.indexOf(",")));
 				int y = Integer.parseInt(loc.substring(loc.indexOf(",")+1));
-				getGame().oneTurn("Player 1", x);
+				game.oneTurn("Player 1", x);
 				showMove(new Button(x, y), "Player 1");
 			}catch(ClassNotFoundException classNotFoundException){
 				//showMessage("The user has sent an unknown object!");
