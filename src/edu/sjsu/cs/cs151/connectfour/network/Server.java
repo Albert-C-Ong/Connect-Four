@@ -20,6 +20,7 @@ public class Server extends ConnectFourGameWindow  {
 	//constructor
 	public Server(ConnectFourMainWindow parent) {
 		super(parent);
+		int x = 0;
 		System.out.println("Set up Successfully");
 	}
 	
