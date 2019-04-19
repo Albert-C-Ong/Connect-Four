@@ -34,7 +34,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   private String cwd = System.getProperty("user.dir");
   
   // Creates a game object. 
-  private ConnectFourGame game;
+  public ConnectFourGame game;
   
   
   /** Constructor for the ConnectFourGameWindow. 
@@ -76,7 +76,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     }
     
     // Makes the window visible. 
-    setVisible(true);
+    //setVisible(true);
   }
   
   
@@ -196,9 +196,5 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     if (play_again == JOptionPane.NO_OPTION){
       this.parent.viewMenuWindow(); // Returns to the menu window. 
     }
-  }
-  
-  public ConnectFourGame getGame() {
-	  return game;
   }
 }
