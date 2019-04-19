@@ -1,3 +1,4 @@
+
 /** ConnectFourMainWindow.java
  * 
  * CS 151 Spring 2019
@@ -16,9 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
-
 import edu.sjsu.cs.cs151.connectfour.network.*;
-
 
 public class ConnectFourMainWindow extends JFrame implements ActionListener {
 
