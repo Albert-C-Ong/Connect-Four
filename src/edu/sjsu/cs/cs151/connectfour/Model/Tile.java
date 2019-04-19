@@ -1,3 +1,4 @@
+
 /** Tile.java
  * 
  * CS 151 Spring 2019
@@ -14,6 +15,11 @@ package edu.sjsu.cs.cs151.connectfour.Model;
 
 
 public class Tile {
+
+  private int x_coord;
+  private int y_coord;
+  private String color;
+  private boolean filled;
   
   
   /**
@@ -94,10 +100,4 @@ public class Tile {
     color = "";
     filled = false;
   }
-  
-  
-  private int x_coord;
-  private int y_coord;
-  private String color;
-  private boolean filled;
 }

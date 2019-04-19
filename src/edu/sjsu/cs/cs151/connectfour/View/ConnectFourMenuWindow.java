@@ -97,7 +97,7 @@ public class ConnectFourMenuWindow extends JPanel implements ActionListener {
       System.out.println("Online play button was pressed!");
     }
     else if (button_name == "EXIT") {
-      dispose();
+    	System.exit(1);
     }
   }
 }

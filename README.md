@@ -1,9 +1,23 @@
-# Connect-Four
-Group project for CS 151. Built using Java Swing.
-Bugs with network:
-Wrong move still draws piece on board.
-Winner only displays on winning computer.
-Play again doesn't happen on both computers.
+# Connect Four
+A board game built for CS 151.
 
+<p align="center">
+  <img width="300" src="https://raw.githubusercontent.com/Anferensis/Connect-Four/master/images/ConnectFour_icon_and_logo.png">
+</p>
 
-Run ServerTest on 1 computer and then ClientTest on another computer. IP in ClientTest should be of ther server.
+## Technologies and Tools
+**Design**
+* [Inkscape](https://inkscape.org/) // Art assets
+
+**Front-end**
+* Java Swing
+
+**Back-end**
+* [Java](https://www.java.com/en/)
+
+**Et Cetera**
+* [GitHub](https://github.com/) // Version Control
+* [Eclipse](https://www.eclipse.org/) // IDE
+
+## Acknowledgement
+Connect Four was created by [Krish Ghiya](https://github.com/krishghiya), [Holly Lind](https://github.com/hollylind), and [Albert Ong](https://github.com/Anferensis).
