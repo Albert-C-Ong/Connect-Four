@@ -36,6 +36,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   // Creates a game object. 
   private ConnectFourGame game;
   
+  //Coordinates of pressed button
   private int x_coord;
   private int y_coord;
   
@@ -76,9 +77,6 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
         add(add_button, gbc);
       }
     }
-    
-    // Makes the window visible. 
-    setVisible(true);
   }
   
   
@@ -97,7 +95,6 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     
     x_coord = button.getXCoord();
     y_coord = button.getYCoord();
-
     String current_player = game.getCurrentPlayer();
     
     String result = game.oneTurn(current_player, x_coord);
@@ -131,8 +128,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   
   
   /* Draws a piece that's just been placed */
-  private void drawNewPiece(String current_player, int x_coord, int y_coord) {
-
+  public void drawNewPiece(String current_player, int x_coord, int y_coord) {
     String icon_path;
     Button button = buttons.get(x_coord).get(y_coord);
     
@@ -148,7 +144,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   /** Displays message after game ends 
    * after closing dialog box, prompts for new game
    */
-  private void openDialogBox(String message, String messageLabel) {
+  public void openDialogBox(String message, String messageLabel) {
     
     // Styles the message font and color. 
     Font message_font = new Font("Arial", Font.BOLD, 60);
@@ -198,7 +194,8 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     
     // If the no button was pressed...
     if (play_again == JOptionPane.NO_OPTION){
-      this.parent.viewMenuWindow(); // Returns to the menu window. 
+      this.parent.viewMenuWindow(); // Returns to the menu window.
+      setVisible(false);
     }
   }
   

@@ -15,6 +15,12 @@ package edu.sjsu.cs.cs151.connectfour.Model;
 
 
 public class Tile {
+
+  private int x_coord;
+  private int y_coord;
+  private String color;
+  private boolean filled;
+  
   
   /**
    * creates a Tile at coordinates (x, y)
@@ -93,10 +99,5 @@ public class Tile {
   public void resetTile() {
     color = "";
     filled = false;
-  }  
-  
-  private int x_coord;
-  private int y_coord;
-  private String color;
-  private boolean filled;
+  }
 }

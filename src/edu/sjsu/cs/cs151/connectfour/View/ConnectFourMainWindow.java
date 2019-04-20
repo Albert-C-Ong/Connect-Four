@@ -1,4 +1,3 @@
-
 /** ConnectFourMainWindow.java
  * 
  * CS 151 Spring 2019
@@ -15,9 +14,14 @@ package edu.sjsu.cs.cs151.connectfour.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
+
 import edu.sjsu.cs.cs151.connectfour.network.*;
+
 
 public class ConnectFourMainWindow extends JFrame implements ActionListener {
 
@@ -92,29 +96,50 @@ public class ConnectFourMainWindow extends JFrame implements ActionListener {
       Image scaled_loading_image = loading_image.getScaledInstance(75, 75,  Image.SCALE_SMOOTH );  
       ImageIcon scaled_loading_icon = new ImageIcon(scaled_loading_image);
       
-      
-      // Displays the search message dialog. 
-      int choice = JOptionPane.showOptionDialog(this, 
-                                   searching_message, 
-                                   "Searching", 
-                                   JOptionPane.YES_NO_CANCEL_OPTION, 
-                                   JOptionPane.QUESTION_MESSAGE, 
-                                   scaled_loading_icon, 
-                                   new String[] {"Player 1", "Player 2"}, 
-                                   null); 
-      
       SwingWorker<Object, Object> server = null;
       final Network player;
       
-      if(choice == 0) {
-    	  Server playerOne = new Server(this);
-    	  player = playerOne;
-      }
-      else if(choice == 1) {
-    	  Client playerTwo = new Client("127.0.0.1", this);
-    	  player = playerTwo;
-      }
-      else return;
+      Client c = new Client(this);
+      String address = c.findServer();
+      
+      if(!address.startsWith("No")) {
+  		  
+    	  String hostName = "";
+    	  try {
+    		  hostName = InetAddress.getByName(address).getHostName();
+    	  } catch (UnknownHostException e) {
+			e.printStackTrace();
+    	  }
+    	  
+  		  int join = JOptionPane.showOptionDialog(this,
+  				  "Connect to " + hostName+"?", 
+                  "Match found", 
+                  JOptionPane.YES_NO_OPTION, 
+                  JOptionPane.QUESTION_MESSAGE, 
+                  scaled_loading_icon, 
+                  new String[] {"Join", "Cancel"}, 
+                  null);
+    		 
+    		 if(join == 0) player = c;
+    		 else return;
+       }
+     
+       else {
+    	   int host = JOptionPane.showOptionDialog(this,
+           "No matches found. Host game?", 
+           "Error", 
+           JOptionPane.YES_NO_OPTION, 
+           JOptionPane.QUESTION_MESSAGE, 
+           scaled_loading_icon, 
+           new String[] {"Host", "Cancel"}, 
+           null);
+    		  
+    	   if(host == 0) {
+    		   Server s = new Server(this);
+    		   player = s;
+    	   }
+    	   else return;
+       }
       
       menu_window.setVisible(false);
       add(player);

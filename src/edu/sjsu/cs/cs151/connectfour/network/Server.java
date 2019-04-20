@@ -2,17 +2,12 @@ package edu.sjsu.cs.cs151.connectfour.network;
 
 import java.io.*;
 import java.net.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourGameWindow;
 import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
-import edu.sjsu.cs.cs151.connectfour.View.Button;
 
 public class Server extends Network  {
 	
 	private ServerSocket server;
+	private DatagramSocket socket;
 	
 	//constructor
 	public Server(ConnectFourMainWindow parent) {
@@ -20,8 +15,9 @@ public class Server extends Network  {
 	}
 	
 	public void startRunning(){
+		broadcastMessage();
 		try{
-			server = new ServerSocket(6789, 100); //6789 is a dummy port for testing, this can be changed. The 100 is the maximum people waiting to connect.
+			server = new ServerSocket(6789, 2); //6789 is a dummy port for testing, this can be changed. The 100 is the maximum people waiting to connect.
 			while(true){
 					//Trying to connect and have conversation
 					waitForConnection();
@@ -34,6 +30,36 @@ public class Server extends Network  {
 	//wait for connection, then display connection information
 	private void waitForConnection() throws IOException{
 		connection = server.accept();
-		System.out.println("Now connected to " + connection.getInetAddress().getHostName());
 	}
+	
+	private void broadcastMessage() {
+	    try {
+	      //Keep a socket open to listen to all the UDP trafic that is destined for this port
+	      socket = new DatagramSocket(6789, InetAddress.getByName("0.0.0.0"));
+	      socket.setBroadcast(true);
+
+	      while (true) {
+	       
+	    	//Receive a packet
+	        byte[] recvBuf = new byte[15000];
+	        DatagramPacket packet = new DatagramPacket(recvBuf, recvBuf.length);
+	        
+	        //Receive Packet
+	        socket.receive(packet);
+
+	        //See if the packet holds the right command (message)
+	        String message = new String(packet.getData()).trim();
+	        if (message.equals("DISCOVER_FUIFSERVER_REQUEST")) {
+	          byte[] sendData = "DISCOVER_FUIFSERVER_RESPONSE".getBytes();
+
+	          //Send a response
+	          DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, packet.getAddress(), packet.getPort());
+	          socket.send(sendPacket);
+	          return;
+	        }
+	      }
+	    } catch (IOException ex) {
+	    	ex.printStackTrace();
+	    }
+	  }
 }

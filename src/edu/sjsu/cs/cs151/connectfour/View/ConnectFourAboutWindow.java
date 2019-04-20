@@ -66,4 +66,5 @@ public class ConnectFourAboutWindow extends JPanel implements ActionListener {
     JButton button = (JButton)event.getSource();
     System.exit(1);
   }
+
 }

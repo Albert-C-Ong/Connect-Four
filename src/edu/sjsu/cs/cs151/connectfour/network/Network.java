@@ -37,7 +37,7 @@ public class Network extends ConnectFourGameWindow{
 		if(getGame().getCurrentPlayer().equals(player)) {
 			
 			super.actionPerformed(event);
-			
+
 			event.setSource(new Button(getXCoord(), getYCoord()));
 			sendMove((Button) event.getSource());
 		}
@@ -45,12 +45,9 @@ public class Network extends ConnectFourGameWindow{
 	
 	 //Start the server
 	public void startRunning(){
-		
 		try{
-			
 			setupStreams();
-			whilePlaying();
-		
+			whilePlaying();	
 		}catch(EOFException eofException){
 			System.out.println("Client terminated the connection");
 		}catch(IOException ioException){
@@ -69,7 +66,6 @@ public class Network extends ConnectFourGameWindow{
 	}
 	
 	public void whilePlaying() throws IOException{
-		
 		do{
 			try{
 				
