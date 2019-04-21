@@ -10,7 +10,7 @@
  * @since 23.03.2019
  */
 
-package edu.sjsu.cs.cs151.connectfour.animationtest;
+package edu.sjsu.cs.cs151.connectfour.View.animationtest;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
