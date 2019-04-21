@@ -31,6 +31,7 @@ public class Client extends Network {
 	}
 
 	public String findServer() {
+		
 		// Find the server using UDP broadcast
 		try {
 			// Open a random port to send the package
@@ -49,7 +50,7 @@ public class Client extends Network {
 			}
 
 			// Broadcast the message over all the network interfaces
-			Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
+			Enumeration<?> interfaces = NetworkInterface.getNetworkInterfaces();
 			while (interfaces.hasMoreElements()) {
 				NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
 
@@ -90,6 +91,9 @@ public class Client extends Network {
 				c.close();
 				return receivePacket.getAddress().getHostAddress();
 			}
+			
+			// Close the port!
+			c.close();
 			
 		} catch (IOException ex) {
 			System.out.println("Oops");

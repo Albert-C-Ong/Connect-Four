@@ -18,7 +18,8 @@ import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
 public class ConnectFour {
 
   public static void main(String[] args) {
-
-    ConnectFourMainWindow connect_four = new ConnectFourMainWindow();
+	  
+	  new ConnectFourMainWindow();
+    
   }
 }

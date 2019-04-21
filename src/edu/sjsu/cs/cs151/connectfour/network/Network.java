@@ -27,17 +27,16 @@ public class Network extends ConnectFourGameWindow {
 		super(parent);
 		this.player = player;
 
-		Border border = BorderFactory.createTitledBorder(player);
-		super.setBorder(border);
+		super.setBorder(BorderFactory.createTitledBorder(player));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-
+		
 		if (getGame().getCurrentPlayer().equals(player)) {
 
 			super.actionPerformed(event);
-
+			
 			event.setSource(new Button(getXCoord(), getYCoord()));
 			sendMove((Button) event.getSource());
 		}
@@ -47,6 +46,7 @@ public class Network extends ConnectFourGameWindow {
 	public void startRunning() {
 		try {
 			setupStreams();
+			setVisible(true);
 			whilePlaying();
 		} catch (EOFException eofException) {
 			System.out.println("Client terminated the connection");
@@ -68,16 +68,16 @@ public class Network extends ConnectFourGameWindow {
 	public void whilePlaying() throws IOException {
 		do {
 			try {
-
+				
 				String loc = (String) input.readObject();
-
+				
 				int x = Integer.parseInt(loc.substring(0, loc.indexOf(",")));
 				int y = Integer.parseInt(loc.substring(loc.indexOf(",") + 1));
 
 				String temp = player.equals("Player 1") ? "Player 2" : "Player 1";
-				getGame().oneTurn(temp, x);
-
-				drawNewPiece(temp, x, y);
+				
+				super.actionPerformed(new ActionEvent(new Button(x, y), 1001, ""));
+				
 
 			} catch (ClassNotFoundException classNotFoundException) {
 				System.out.println("The user has sent an unknown object!");

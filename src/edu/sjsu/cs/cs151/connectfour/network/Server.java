@@ -12,6 +12,7 @@ public class Server extends Network {
 	// constructor
 	public Server(ConnectFourMainWindow parent) {
 		super(parent, "Player 1");
+		setVisible(false);
 	}
 
 	public void startRunning() {
@@ -20,7 +21,7 @@ public class Server extends Network {
 			server = new ServerSocket(8888, 2); // 8888 is a dummy port for testing, this can be changed. The 100 is
 													// the maximum people waiting to connect.
 			while (true) {
-				// Trying to connect and have conversation
+				// Trying to connect and have match
 				waitForConnection();
 				super.startRunning();
 			}
