@@ -7,13 +7,14 @@
  * UI button object.
  * 
  * @author Holly Lind
- * @since 23.03.2019
+ * @since 24.04.2019
  * 
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
 
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 
 public class Button extends JButton {
@@ -31,6 +32,9 @@ public class Button extends JButton {
     this.y = y;
   }
   
+  public Button(ImageIcon icon) {
+    super(icon);
+  }
   
   /**
    * Access method for x

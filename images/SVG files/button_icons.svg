@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="64.811602"
-     inkscape:cy="48.98085"
+     inkscape:zoom="3.959798"
+     inkscape:cx="39.494377"
+     inkscape:cy="14.32007"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -53,29 +53,54 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
+     inkscape:label="Drawing"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-270.54166)">
+     transform="translate(0,-270.54166)"
+     style="display:inline">
     <circle
-       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.11267427;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:0.11267427;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path3845"
        cx="13.229167"
        cy="283.77081"
        r="10.583333"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
-    <circle
-       style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:0.14084284;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path3845-4"
-       cx="52.561577"
-       cy="288.04712"
-       r="13.229167" />
-    <circle
-       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.14084284;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path3845-5"
-       cx="52.561577"
-       cy="255.30595"
-       r="13.229167" />
+    <rect
+       id="rect3345"
+       width="7.6540189"
+       height="7.6540189"
+       x="4.0992537"
+       y="300.96875"
+       rx="0"
+       ry="0"
+       style="fill:#c0c0c0;fill-opacity:1;stroke:none;stroke-width:0.1010908" />
+    <rect
+       id="rect3345-9-0"
+       width="7.6540189"
+       height="7.6540189"
+       x="14.22847"
+       y="300.96875"
+       rx="0"
+       ry="0"
+       style="fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:0.1010908" />
+    <rect
+       id="rect3345-9-0-2"
+       width="7.6540189"
+       height="7.6540189"
+       x="24.357687"
+       y="300.96875"
+       rx="0"
+       ry="0"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.1010908" />
+    <rect
+       id="rect3345-9-0-2-8"
+       width="7.6540189"
+       height="7.6540189"
+       x="-6.0299644"
+       y="300.96875"
+       rx="0"
+       ry="0"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.1010908" />
   </g>
 </svg>

@@ -7,10 +7,7 @@
  * Menu window for Connect Four. 
  * 
  * @author Albert Ong
- * @since 27.03.2019
- * 
- * TODO:
- *   Implement ConnectFourOnlineGameWindow 
+ * @since 24.04.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -21,7 +18,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class ConnectFourMenuWindow extends JPanel implements ActionListener {
+public class ConnectFourMenuWindow extends JPanel {
 
   // Retrieves the current working directory. 
   // This is used primarily for accessing image files. 
@@ -77,27 +74,5 @@ public class ConnectFourMenuWindow extends JPanel implements ActionListener {
     }
     
     setVisible(true);
-  }
-  
-  
-  public void actionPerformed(ActionEvent event) {
-    
-    // Retrieves the button object that was pressed. 
-    JButton button = (JButton)event.getSource();
-    
-    String button_name = button.getName();
-    
-    if (button_name == "PLAY") {
-      System.out.println("Play button was pressed!");
-    }
-    else if (button_name == "ABOUT") {
-      System.out.println("About button was pressed!");
-    }
-    else if (button_name == "ONLINE_PLAY") {
-      System.out.println("Online play button was pressed!");
-    }
-    else if (button_name == "EXIT") {
-    	System.exit(1);
-    }
   }
 }

@@ -1,3 +1,4 @@
+
 /** ConnectFourMainWindow.java
  * 
  * CS 151 Spring 2019
@@ -6,7 +7,7 @@
  * Main window for Connect Four. 
  * 
  * @author Albert Ong
- * @since 29.03.2019
+ * @since 24.04.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -19,7 +20,6 @@ import java.net.UnknownHostException;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
-
 import edu.sjsu.cs.cs151.connectfour.network.*;
 
 public class ConnectFourMainWindow extends JFrame implements ActionListener {
@@ -101,9 +101,9 @@ public class ConnectFourMainWindow extends JFrame implements ActionListener {
 			String address = c.findServer();
 
 			if (!address.startsWith("No")) {
-				
+
 				c.setServerIP(address);
-				
+
 				String hostName = "";
 				try {
 					hostName = InetAddress.getByName(address).getHostName();

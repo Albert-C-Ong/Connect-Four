@@ -7,7 +7,7 @@
  * A class that tests the Tile falling animation.
  * 
  * @author Holly Lind and Albert Ong
- * @since 23.03.2019
+ * @since 25.03.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.animationtest;
@@ -49,10 +49,12 @@ public class AnimationTester {
     
     //makes the shape + an icon for it
     MoveableShape shape;
-    if (color.equalsIgnoreCase("red"))
+    if (color.equalsIgnoreCase("red")) {
       shape = new TileShape(0, 0, 100, dark_red, light_red, endHeight);
-    else
+    }
+    else {
       shape = new TileShape(0, 0, 100, dark_gray, light_gray, endHeight); 
+    }
     TileIcon icon = new TileIcon(shape, 100, 1000);
     
     //labels the shape + adds to frame

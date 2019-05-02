@@ -29,8 +29,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="615.14973"
-     inkscape:cy="690.67762"
+     inkscape:cx="1174.6962"
+     inkscape:cy="658.71051"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -230,7 +230,7 @@
          style="line-height:1"
          id="flowPara4398" /><flowPara
          style="line-height:1"
-         id="flowPara3224">Current version: 25 March, 2019</flowPara><flowPara
+         id="flowPara3224">Current version: 20 April, 2019</flowPara><flowPara
          style="line-height:1"
          id="flowPara3220">Written by Krish Ghiya, Holly Lind, and Albert Ong. </flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
@@ -257,7 +257,7 @@
        y="260.6528"
        ry="3.124208" />
     <rect
-       style="fill:none;fill-opacity:1;stroke:#ff2a2a;stroke-width:0.5430885;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5430885;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4949"
        width="312.14493"
        height="161.57047"

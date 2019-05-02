@@ -1,3 +1,6 @@
+package edu.sjsu.cs.cs151.connectfour.Model;
+
+import java.util.ArrayList;
 
 /** Board.java
  * 
@@ -7,33 +10,24 @@
  * A class the represents the board Connect Four
  * is played on. Inherits a 2D ArrayList of Tiles.
  * 
- * @author Holly Lind and Albert Ong
- * @since 23.03.2019
+ * @author Holly Lind
+ * @since 17.4.2019
  */
+public class Board {
 
-package edu.sjsu.cs.cs151.connectfour.Model;
-
-import java.util.ArrayList;
-
-
-public class Board extends ArrayList<ArrayList<Tile>> {
-
-  private static final int BOARD_COLUMNS = 7;
-  private static final int BOARD_ROWS = 6;
-  private static final String PLAYER_ONE_COLOR = "red";
-  private static final String PLAYER_TWO_COLOR = "black";
   
   /**
    * creates a Board
-   * @postcondition Board created with BOARD_COLUMNS and BOARD_ROWS
+   * @postcondition tiles initiated with BOARD_COLUMNS and BOARD_ROWS
    * all Tiles are colorless and filled is false
    */
   public Board() {
+    tiles = new ArrayList<ArrayList<Tile>>();
     for (int i = 0; i < BOARD_COLUMNS; i++) {
-      this.add(new ArrayList<Tile>());
+      tiles.add(new ArrayList<Tile>());
       
       for (int j = 0; j < BOARD_ROWS; j++)
-        this.get(i).add(new Tile(i, j));
+        tiles.get(i).add(new Tile(i, j));
     }
   }
   
@@ -99,7 +93,7 @@ public class Board extends ArrayList<ArrayList<Tile>> {
    */
   public void setTile(int column, int row, String player) {
     Tile tileToChange = this.getTile(column, row);
-    if (player.equals(ConnectFourGame.getPlayerOne())) {
+    if (player.equals(Model.getPlayerOne())) {
       tileToChange.setColor(PLAYER_ONE_COLOR);
       tileToChange.nowFilled();
     }
@@ -129,6 +123,13 @@ public class Board extends ArrayList<ArrayList<Tile>> {
    * @return Tile at (x, y)
    */
   public Tile getTile(int x, int y) {
-    return this.get(x).get(y);
+    return tiles.get(x).get(y);
   }
+  
+  
+  private ArrayList<ArrayList<Tile>> tiles;
+  private static final int BOARD_COLUMNS = 7;
+  private static final int BOARD_ROWS = 6;
+  private static final String PLAYER_ONE_COLOR = "red";
+  private static final String PLAYER_TWO_COLOR = "black";
 }

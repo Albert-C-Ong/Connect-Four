@@ -1,5 +1,5 @@
 
-/** ConnectFourMenuWindow.java
+/** ConnectFourAboutWindow.java
  * 
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
@@ -7,7 +7,7 @@
  * About window for Connect Four. 
  * 
  * @author Albert Ong
- * @since 27.03.2019
+ * @since 24.04.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class ConnectFourAboutWindow extends JPanel implements ActionListener {
+public class ConnectFourAboutWindow extends JPanel {
   
   // Retrieves the current working directory. 
   // This is used primarily for accessing image files. 
@@ -26,6 +26,7 @@ public class ConnectFourAboutWindow extends JPanel implements ActionListener {
   
   public ConnectFourAboutWindow(ConnectFourMainWindow parent) {
     
+    // Sets the background color to white. 
     setBackground(Color.WHITE);
     
     // Adds the grid layout and sets the constraints. 
@@ -48,7 +49,7 @@ public class ConnectFourAboutWindow extends JPanel implements ActionListener {
     button.setRolloverIcon(new ImageIcon(cwd + "\\images\\menu_button_okay_select.png"));
     button.addActionListener(parent);
     
-    // Makes the border and content of the button opqaue. 
+    // Makes the border and content of the button opaque. 
     button.setOpaque(false);
     button.setContentAreaFilled(false);
     button.setBorderPainted(false);
@@ -56,15 +57,6 @@ public class ConnectFourAboutWindow extends JPanel implements ActionListener {
     // Adds the okay button. 
     add(button, gbc);
     
-
     setVisible(true);
   }
-  
-  public void actionPerformed(ActionEvent event) {
-    
-    // Retrieves the button object that was pressed. 
-    JButton button = (JButton)event.getSource();
-    System.exit(1);
-  }
-
 }
