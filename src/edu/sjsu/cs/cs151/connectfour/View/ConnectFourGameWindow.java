@@ -42,9 +42,6 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   private Font message_font = new Font("Arial", Font.BOLD, 48);
   private Color message_color = new Color(255, 42, 42);
   
-  private int x_coord;
-  private int y_coord;
-  
   /** Constructor for the ConnectFourGameWindow. 
    * initializes game window
    * @postcondition window is created with blank board
@@ -129,12 +126,12 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   public void actionPerformed(ActionEvent event) {
     
     // Retrieves the button that was pressed. 
-    Button button = (Button)event.getSource();
-    String button_name = button.getName();
+    Button button = (Button) event.getSource();
+    String button_name = button.getName() != null ? button.getName() : "";
     
     // If the restart button was pressed...
-    if (button_name == "GAME_RESTART") {
-      
+    if (button_name.equals("GAME_RESTART")) {
+
       JLabel message = new JLabel("Do you want to restart?");
       message.setFont(message_font);
       message.setForeground(message_color);
@@ -158,7 +155,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     
     
     // If the quit button was pressed...
-    else if (button_name == "GAME_QUIT") {
+    else if (button_name.equals("GAME_QUIT")) {
       
       JLabel message = new JLabel("Do you want to quit?");
       message.setFont(message_font);
@@ -185,8 +182,8 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     
     // If a tile on the grid was pressed...
     else {
-      x_coord = button.getXCoord();
-      y_coord = button.getYCoord();
+      int x_coord = button.getXCoord();
+      int y_coord = button.getYCoord();
 
       String current_player = game.getCurrentPlayer();
       String result = game.oneTurn(current_player, x_coord);
@@ -216,7 +213,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   
   
   /* Draws a piece that's just been placed */
-  private void drawNewPiece(String current_player, int x_coord, int y_coord, boolean game_over) {
+  public void drawNewPiece(String current_player, int x_coord, int y_coord, boolean game_over) {
 
     String icon_path;
     String player_text_path;
@@ -243,7 +240,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   /** Displays message after game ends 
    * after closing dialog box, prompts for new game
    */
-  private void openDialogBox(String message, String messageLabel) {
+  public void openDialogBox(String message, String messageLabel) {
     
     // Creates the winner message.  
     JLabel initial_message = new JLabel(message);
@@ -289,7 +286,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
    * 
    * Used in openDialogBox() and actionPerformed();
    */
-  private void restart() {
+  public void restart() {
     
     // Resets the game logic and the player text. 
     game.newGame();
@@ -309,10 +306,12 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   public Model getGame() {
     return game;
   }
-  public int getXCoord() {
-    return x_coord;
+  
+  public Font getMessageFont() {
+	  return message_font;
   }
-  public int getYCoord() {
-    return y_coord;
-  }  
+  
+  public Color getMessageColor() {
+	  return message_color;
+  }
 }
