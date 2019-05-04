@@ -7,7 +7,7 @@
  * Game window for Connect Four. Creates UI elements.
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 24.04.2019
+ * @since 04.05.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -42,8 +42,11 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   private Font message_font = new Font("Arial", Font.BOLD, 48);
   private Color message_color = new Color(255, 42, 42);
   
+  
   /** Constructor for the ConnectFourGameWindow. 
    * initializes game window
+   * 
+   * @param parent A ConnetFourMainWindow object that contains the game window. 
    * @postcondition window is created with blank board
    */
   public ConnectFourGameWindow(ConnectFourMainWindow parent) {
@@ -115,14 +118,18 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   
-  /* Draws the background image. */
+  /**
+   * Draws the background image. 
+   */
   public void paintComponent(Graphics g) {
     Image background = new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png").getImage();
     g.drawImage(background, 0, -18, null);
   }
   
   
-  /* The method that activates whenever a button is pressed. */
+  /**
+   * The method that activates whenever a button is pressed. 
+   */
   public void actionPerformed(ActionEvent event) {
     
     // Retrieves the button that was pressed. 
@@ -212,7 +219,9 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   
-  /* Draws a piece that's just been placed */
+  /**
+   *  Draws a piece that's just been placed 
+   */
   public void drawNewPiece(String current_player, int x_coord, int y_coord, boolean game_over) {
 
     String icon_path;
@@ -282,7 +291,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   
-  /** Resets the game logic and clears the boad. 
+  /** Resets the game logic and clears the board. 
    * 
    * Used in openDialogBox() and actionPerformed();
    */
@@ -308,10 +317,10 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   public Font getMessageFont() {
-	  return message_font;
+    return message_font;
   }
   
   public Color getMessageColor() {
-	  return message_color;
+    return message_color;
   }
 }
