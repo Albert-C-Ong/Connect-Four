@@ -49,7 +49,7 @@ public class Server extends Network {
 		try {
 			server.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//Unimportant
 		}
 	}
 	
