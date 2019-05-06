@@ -37,7 +37,7 @@ public class Client extends Network {
 			// Open a random port to send the package
 			DatagramSocket c = new DatagramSocket();
 			c.setBroadcast(true);
-			c.setSoTimeout(20000);
+			c.setSoTimeout(10000);
 			
 			byte[] sendData = "DISCOVER_FUIFSERVER_REQUEST".getBytes();
 
@@ -68,6 +68,7 @@ public class Client extends Network {
 					try {
 						DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 8888);
 						c.send(sendPacket);
+						System.out.println(broadcast.getHostAddress());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
