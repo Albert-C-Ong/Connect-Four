@@ -98,11 +98,10 @@ public class ConnectFourMainWindow extends JFrame implements ActionListener {
 			final Network player;
 
 			Client c = new Client(this);
-			String address = c.findServer();
+			c.findServer();
+			String address = c.getServerIP();
 
 			if (!address.startsWith("No")) {
-
-				c.setServerIP(address);
 
 				String hostName = "";
 				try {
