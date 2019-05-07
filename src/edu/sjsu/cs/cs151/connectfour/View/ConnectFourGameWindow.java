@@ -7,7 +7,7 @@
  * Game window for Connect Four. Creates UI elements.
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 04.05.2019
+ * @since 24.04.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.View;
@@ -42,11 +42,8 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   private Font message_font = new Font("Arial", Font.BOLD, 48);
   private Color message_color = new Color(255, 42, 42);
   
-  
   /** Constructor for the ConnectFourGameWindow. 
    * initializes game window
-   * 
-   * @param parent A ConnetFourMainWindow object that contains the game window. 
    * @postcondition window is created with blank board
    */
   public ConnectFourGameWindow(ConnectFourMainWindow parent) {
@@ -114,22 +111,19 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     add(quit_button, gbc);
     
     // Makes the window visible. 
+    //System.out.println("It's visible now");
     setVisible(true);
   }
   
   
-  /**
-   * Draws the background image. 
-   */
+  /* Draws the background image. */
   public void paintComponent(Graphics g) {
     Image background = new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png").getImage();
     g.drawImage(background, 0, -18, null);
   }
   
   
-  /**
-   * The method that activates whenever a button is pressed. 
-   */
+  /* The method that activates whenever a button is pressed. */
   public void actionPerformed(ActionEvent event) {
     
     // Retrieves the button that was pressed. 
@@ -190,27 +184,31 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     // If a tile on the grid was pressed...
     else {
       int x_coord = button.getXCoord();
-      int y_coord = button.getYCoord();
+      int y_coord;
 
       String current_player = game.getCurrentPlayer();
-      String result = game.oneTurn(current_player, x_coord);
+      GameInfo result = game.oneTurn(current_player, x_coord);
       
-      if (result.startsWith("piece placed")) {
-        y_coord = Integer.parseInt(result.substring(19));
+      if (result.getMostRecentlyPlacedTile() == null) {
+    	  //do nothing - no tile placed
+      }
+      
+      else if (result.getCurrentState() == GameState.PLAYING) {
+    	y_coord = result.getMostRecentlyPlacedTile().getYCoord();
         drawNewPiece(current_player, x_coord, y_coord, false);
       }
       
       // If a player wins...
-      else if (result.startsWith("win")) {
-        y_coord = Integer.parseInt(result.substring(13));
+      else if (result.getCurrentState() == GameState.WIN) {
+    	y_coord = result.getMostRecentlyPlacedTile().getYCoord();
         drawNewPiece(current_player, x_coord, y_coord, true);
         
         openDialogBox(game.getCurrentPlayer() + " wins!", "Winner");
       }
       
       // If the game ends in a tie...
-      else if (result.startsWith("tie")) {
-        y_coord = Integer.parseInt(result.substring(10, 11));
+      else if (result.getCurrentState() == GameState.TIE) {
+    	y_coord = result.getMostRecentlyPlacedTile().getYCoord();
         drawNewPiece(current_player, x_coord, y_coord, true);
         
         openDialogBox("Tie!", "Tie");
@@ -219,9 +217,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   
-  /**
-   *  Draws a piece that's just been placed 
-   */
+  /* Draws a piece that's just been placed */
   public void drawNewPiece(String current_player, int x_coord, int y_coord, boolean game_over) {
 
     String icon_path;
@@ -291,7 +287,7 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   
-  /** Resets the game logic and clears the board. 
+  /** Resets the game logic and clears the boad. 
    * 
    * Used in openDialogBox() and actionPerformed();
    */
@@ -317,10 +313,10 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   }
   
   public Font getMessageFont() {
-    return message_font;
+	  return message_font;
   }
   
   public Color getMessageColor() {
-    return message_color;
+	  return message_color;
   }
 }

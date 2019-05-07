@@ -7,7 +7,7 @@
  * The main program to the Connect Four game. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 04.05.2019
+ * @since 24.04.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.app;
@@ -19,6 +19,6 @@ public class ConnectFour {
 
   public static void main(String[] args) {
 
-	  new ConnectFourMainWindow();
+    new ConnectFourMainWindow();
   }
 }
