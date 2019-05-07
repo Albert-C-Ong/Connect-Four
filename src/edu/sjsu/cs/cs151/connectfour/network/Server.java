@@ -59,7 +59,7 @@ public class Server extends Network {
 		try {
 			// Keep a socket open to listen to all the UDP trafic that is destined for this
 			// port
-			socket = new DatagramSocket(8888, InetAddress.getByName("0.0.0.0"));
+			socket = new DatagramSocket(8888);
 			socket.setBroadcast(true);
 
 			System.out.println(getClass().getName() + ">>>Ready to receive broadcast packets!");
