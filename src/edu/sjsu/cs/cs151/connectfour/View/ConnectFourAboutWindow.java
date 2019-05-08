@@ -15,14 +15,13 @@ package edu.sjsu.cs.cs151.connectfour.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.*;
 
 
 public class ConnectFourAboutWindow extends JPanel {
   
-  // Retrieves the current working directory. 
-  // This is used primarily for accessing image files. 
-  private String cwd = System.getProperty("user.dir");
   
   public ConnectFourAboutWindow(ConnectFourMainWindow parent) {
     
@@ -38,15 +37,18 @@ public class ConnectFourAboutWindow extends JPanel {
     gbc.insets = new Insets(0, 0, 20, 0);
     
     // Adds the about page text
-    JLabel text = new JLabel(new ImageIcon(cwd + "\\images\\ConnectFourAboutWindow_text.png"));
+    URL url = ConnectFourMainWindow.class.getResource("/resources/ConnectFourAboutWindow_text.png");
+    JLabel text = new JLabel(new ImageIcon(url));
     add(text, gbc);
     
     // Creates the okay button. 
     JButton button = new JButton();
     button.setName("ABOUT_OKAY");
     button.setPreferredSize(new Dimension(400, 80));
-    button.setIcon(new ImageIcon(cwd + "\\images\\menu_button_okay_deselect.png"));
-    button.setRolloverIcon(new ImageIcon(cwd + "\\images\\menu_button_okay_select.png"));
+    URL url_select = ConnectFourMainWindow.class.getResource("/resources/menu_button_okay_select.png");
+    URL url_deselect = ConnectFourMainWindow.class.getResource("/resources/menu_button_okay_deselect.png");
+    button.setIcon(new ImageIcon(url_deselect));
+    button.setRolloverIcon(new ImageIcon(url_select));
     button.addActionListener(parent);
     
     // Makes the border and content of the button opaque. 

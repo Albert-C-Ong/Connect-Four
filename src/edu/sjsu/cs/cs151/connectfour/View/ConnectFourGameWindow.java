@@ -16,6 +16,7 @@ import edu.sjsu.cs.cs151.connectfour.Model.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.ClassCastException;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -28,15 +29,12 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   // A two-dimensional array that stores the grid of buttons. 
   private ArrayList<ArrayList<Button>> buttons;
   
-  // Retrieves the current working directory. 
-  // This is used primarily for accessing image files. 
-  private String cwd = System.getProperty("user.dir");
-  
   // Creates a game object. 
   private Model game;
   
   // Initializes the player turn text. 
-  private JLabel player_text = new JLabel(new ImageIcon(cwd + "\\images\\game_window_player_1_turn_text.png")); 
+  URL url_initial_player_text = ConnectFourMainWindow.class.getResource("/resources/game_window_player_1_turn_text.png");
+  private JLabel player_text = new JLabel(new ImageIcon(url_initial_player_text));
   
   // Styles the message font and color for JDialogBox object. 
   private Font message_font = new Font("Arial", Font.BOLD, 48);
@@ -72,7 +70,8 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
         add_button.setOpaque(false);
         add_button.setContentAreaFilled(false);
         add_button.setBorderPainted(false);
-        add_button.setIcon(new ImageIcon(cwd + "\\images\\button_white.png"));
+        URL url = ConnectFourMainWindow.class.getResource("/resources/button_white.png");
+        add_button.setIcon(new ImageIcon(url));
         add_button.addActionListener(this);
         
         buttons.get(x).add(add_button);
@@ -88,8 +87,10 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     add(player_text, gbc);
     
     // Adding the restart and quit buttons
-    Button restart_button = new Button(new ImageIcon(cwd + "\\images\\game_button_restart_deselect.png"));
-    restart_button.setRolloverIcon(new ImageIcon(cwd + "\\images\\game_button_restart_select.png"));
+    URL url_restart_select = ConnectFourMainWindow.class.getResource("/resources/game_button_restart_select.png");
+	URL url_restart_deselect = ConnectFourMainWindow.class.getResource("/resources/game_button_restart_deselect.png");
+	Button restart_button = new Button(new ImageIcon(url_restart_deselect));
+	restart_button.setRolloverIcon(new ImageIcon(url_restart_select));
     restart_button.setPreferredSize(new Dimension(200, 40));
     restart_button.setName("GAME_RESTART");
     restart_button.addActionListener(this);
@@ -100,8 +101,10 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     gbc.gridwidth = 2;
     add(restart_button, gbc);
     
-    Button quit_button = new Button(new ImageIcon(cwd + "\\images\\game_button_quit_deselect.png"));
-    quit_button.setRolloverIcon(new ImageIcon(cwd + "\\images\\game_button_quit_select.png"));
+    URL url_quit_select = ConnectFourMainWindow.class.getResource("/resources/game_button_quit_select.png");
+    URL url_quit_deselect = ConnectFourMainWindow.class.getResource("/resources/game_button_quit_deselect.png");
+    Button quit_button = new Button(new ImageIcon(url_quit_deselect));
+    quit_button.setRolloverIcon(new ImageIcon(url_quit_select));
     quit_button.setPreferredSize(new Dimension(200, 40));
     quit_button.setName("GAME_QUIT");
     quit_button.addActionListener(this);
@@ -111,14 +114,14 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
     add(quit_button, gbc);
     
     // Makes the window visible. 
-    //System.out.println("It's visible now");
     setVisible(true);
   }
   
   
   /* Draws the background image. */
   public void paintComponent(Graphics g) {
-    Image background = new ImageIcon(cwd + "\\images\\ConnectFourGameWindow_background.png").getImage();
+	URL url = ConnectFourMainWindow.class.getResource("/resources/ConnectFourGameWindow_background.png");
+    Image background = new ImageIcon(url).getImage();
     g.drawImage(background, 0, -18, null);
   }
   
@@ -220,24 +223,24 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
   /* Draws a piece that's just been placed */
   public void drawNewPiece(String current_player, int x_coord, int y_coord, boolean game_over) {
 
-    String icon_path;
-    String player_text_path;
     Button button = buttons.get(x_coord).get(y_coord);
+    URL url_icon;
+    URL url_player_text;
     
     if (current_player.equals(Model.getPlayerOne())) {
-      icon_path = "\\images\\button_red.png";
-      player_text_path = "\\images\\game_window_player_2_turn_text.png";
+      url_icon = ConnectFourMainWindow.class.getResource("/resources/button_red.png");
+      url_player_text = ConnectFourMainWindow.class.getResource("/resources/game_window_player_2_turn_text.png");
     }
     else {
-      icon_path = "\\images\\button_black.png";
-      player_text_path = "\\images\\game_window_player_1_turn_text.png";
+      url_icon = ConnectFourMainWindow.class.getResource("/resources/button_black.png");
+      url_player_text = ConnectFourMainWindow.class.getResource("/resources/game_window_player_1_turn_text.png");
     }
     
-    button.setIcon(new ImageIcon(cwd + icon_path));
+    button.setIcon(new ImageIcon(url_icon));
     
     // Changes the player text if the game is not over. 
     if (!game_over) {
-      player_text.setIcon(new ImageIcon(cwd + player_text_path));
+      player_text.setIcon(new ImageIcon(url_player_text));
     }
   }
   
@@ -292,17 +295,19 @@ public class ConnectFourGameWindow extends JPanel implements ActionListener {
    * Used in openDialogBox() and actionPerformed();
    */
   public void restart() {
-    
+      
     // Resets the game logic and the player text. 
     game.newGame();
-    player_text.setIcon(new ImageIcon(cwd + "\\images\\game_window_player_1_turn_text.png"));
+    URL url_player_text = ConnectFourMainWindow.class.getResource("/resources/game_window_player_1_turn_text.png");
+    player_text.setIcon(new ImageIcon(url_player_text));
     
     // Clears all of the button icons. 
     for (int x = 0; x < Board.getColumns(); x++) {
       for (int y = 0; y < Board.getRows(); y++) {
         
         Button currentButton = buttons.get(x).get(y);
-        currentButton.setIcon(new ImageIcon(cwd + "\\images\\button_white.png"));
+        URL url_icon = ConnectFourMainWindow.class.getResource("/resources/button_white.png");
+        currentButton.setIcon(new ImageIcon(url_icon));
       }
     }
   }

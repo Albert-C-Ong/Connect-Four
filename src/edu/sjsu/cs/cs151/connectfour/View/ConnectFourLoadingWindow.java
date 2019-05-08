@@ -1,6 +1,8 @@
 package edu.sjsu.cs.cs151.connectfour.View;
 
 import java.awt.*;
+import java.net.URL;
+
 import javax.swing.*;
 
 import edu.sjsu.cs.cs151.connectfour.View.animation.*;
@@ -42,8 +44,10 @@ public class ConnectFourLoadingWindow extends JPanel {
 	    JButton button = new JButton();
 	    button.setName("LOADING_EXIT");
 	    button.setPreferredSize(new Dimension(400, 80));
-	    button.setIcon(new ImageIcon(cwd + "\\images\\menu_button_exit_deselect.png"));
-	    button.setRolloverIcon(new ImageIcon(cwd + "\\images\\menu_button_exit_select.png"));
+	    URL url_select = ConnectFourMainWindow.class.getResource("/resources/menu_button_exit_select.png");
+		URL url_deselect = ConnectFourMainWindow.class.getResource("/resources/menu_button_exit_deselect.png");
+		button.setIcon(new ImageIcon(url_deselect));
+		button.setRolloverIcon(new ImageIcon(url_select));
 	    button.addActionListener(parent);
 	    
 	    // Makes the border and content of the button opaque. 
@@ -64,9 +68,5 @@ public class ConnectFourLoadingWindow extends JPanel {
 	    
 	    setVisible(true); 
 	}
-	
-	
-	
-	private String cwd = System.getProperty("user.dir");
 	
 }

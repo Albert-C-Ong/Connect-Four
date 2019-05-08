@@ -15,14 +15,13 @@ package edu.sjsu.cs.cs151.connectfour.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.*;
 
 
 public class ConnectFourMenuWindow extends JPanel {
 
-  // Retrieves the current working directory. 
-  // This is used primarily for accessing image files. 
-  private String cwd = System.getProperty("user.dir");
   
   public ConnectFourMenuWindow(ConnectFourMainWindow parent) {
     
@@ -35,7 +34,8 @@ public class ConnectFourMenuWindow extends JPanel {
     gbc.gridx = 0;
     gbc.insets = new Insets(0, 0, 20, 0);
     
-    JLabel logo = new JLabel(new ImageIcon(cwd + "\\images\\ConnectFour_logo.png"));
+    URL url1 = ConnectFourMainWindow.class.getResource("/resources/ConnectFour_logo.png");
+    JLabel logo = new JLabel(new ImageIcon(url1));
     logo.setAlignmentX(Component.CENTER_ALIGNMENT);
     add(logo, gbc);
 
@@ -60,15 +60,17 @@ public class ConnectFourMenuWindow extends JPanel {
       button.setContentAreaFilled(false);
       button.setBorderPainted(false);
       
-      // Finds the path to the image icons. 
-      String image_path = cwd + "\\images\\menu_button_" + name.toLowerCase();
+      // Finds the path to the image icons.
+      String image_path = "/resources/menu_button_" + name.toLowerCase();
       String button_select_image = image_path + "_select.png";
       String button_deselect_image = image_path + "_deselect.png";
       
       // Assigns the default button icon as well as the icon
       // that appears when moused over. 
-      button.setIcon(new ImageIcon(button_deselect_image));
-      button.setRolloverIcon(new ImageIcon(button_select_image));
+      URL url_select = ConnectFourMainWindow.class.getResource(button_select_image);
+      URL url_deselect = ConnectFourMainWindow.class.getResource(button_deselect_image);
+      button.setIcon(new ImageIcon(url_deselect));
+      button.setRolloverIcon(new ImageIcon(url_select));
       
       add(button, gbc);
     }

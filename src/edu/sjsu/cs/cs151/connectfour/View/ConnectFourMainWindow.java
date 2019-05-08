@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.concurrent.*;
 import javax.swing.*;
@@ -26,10 +27,6 @@ import edu.sjsu.cs.cs151.connectfour.View.animation.*;
 import edu.sjsu.cs.cs151.connectfour.network.*;
 
 public class ConnectFourMainWindow extends JFrame implements ActionListener {
-
-	// Retrieves the current working directory.
-	// This is used primarily for accessing image files.
-	private String cwd = System.getProperty("user.dir");
 
 	// Creates the menu, about, and game window objects.
 	private ConnectFourMenuWindow menu_window = new ConnectFourMenuWindow(this);
@@ -46,7 +43,8 @@ public class ConnectFourMainWindow extends JFrame implements ActionListener {
 		setResizable(false);
 
 		// Retrieves and sets the window icon.
-		ImageIcon icon = new ImageIcon(cwd + "\\images\\window_icon.png");
+		URL url = ConnectFourMainWindow.class.getResource("/resources/window_icon.png");
+		ImageIcon icon = new ImageIcon(url);
 		setIconImage(icon.getImage());
 
 		// Displays the menu window by default.
