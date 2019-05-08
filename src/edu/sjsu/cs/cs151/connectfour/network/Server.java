@@ -25,7 +25,7 @@ public class Server extends Network {
 	public void startRunning() {
 		broadcastMessage();
 		try {
-			server = new ServerSocket(8888, 1); // 8888 is a dummy port for testing, this can be changed. The 1 is
+			server = new ServerSocket(port, 2); // port is a dummy port for testing, this can be changed. The 1 is
 												// the maximum people waiting to connect.
 			while (true) {
 				// Trying to connect and have match
@@ -59,7 +59,7 @@ public class Server extends Network {
 		try {
 			// Keep a socket open to listen to all the UDP trafic that is destined for this
 			// port
-			socket = new DatagramSocket(8888);
+			socket = new DatagramSocket(port, InetAddress.getByName("0.0.0.0"));
 			socket.setBroadcast(true);
 
 			System.out.println(getClass().getName() + ">>>Ready to receive broadcast packets!");

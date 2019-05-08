@@ -25,7 +25,8 @@ public class Network extends ConnectFourGameWindow {
 	protected ObjectOutputStream output;
 	protected ObjectInputStream input;
 	protected Socket connection;
-
+	protected int port = 135;
+	
 	public Network(ConnectFourMainWindow parent, String player) {
 		
 		super(parent);

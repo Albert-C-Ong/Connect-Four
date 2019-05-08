@@ -27,7 +27,7 @@ public class Client extends Network {
 
 	// connect to server
 	private void connectToServer() throws IOException {
-		connection = new Socket(InetAddress.getByName(serverIP), 8888);
+		connection = new Socket(InetAddress.getByName(serverIP), port);
 	}
 
 	public void findServer() {
@@ -43,14 +43,14 @@ public class Client extends Network {
 
 		  //Try the 255.255.255.255 first
 		  try {
-		    DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), 8888);
+		    DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), port);
 		    c.send(sendPacket);
 		    System.out.println(getClass().getName() + ">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
 		  } catch (Exception e) {
 		  }
 
 		  // Broadcast the message over all the network interfaces
-		  Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
+		  Enumeration<?> interfaces = NetworkInterface.getNetworkInterfaces();
 		  
 		  while (interfaces.hasMoreElements()) {
 			  
@@ -68,7 +68,7 @@ public class Client extends Network {
 
 		      // Send the broadcast package!
 		      try {
-		        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 8888);
+		        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, port);
 		        c.send(sendPacket);
 		      } catch (Exception e) {
 		      }
