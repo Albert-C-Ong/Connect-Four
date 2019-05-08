@@ -21,13 +21,11 @@ public class Server extends Network {
 		super(parent, "Player 1");
 		this.parent = parent;
 		setVisible(false);
-		System.out.println("Server is initialized");
 	}
 
 	public void startRunning() {
-		System.out.println("startRunning() got started");
 		broadcastMessage();
-		System.out.println("broadcasted message");
+		
 		try {
 			server = new ServerSocket(8888, 2); // 8888 is a dummy port for testing, this can be changed. The 2 is
 													// the maximum people waiting to connect.
