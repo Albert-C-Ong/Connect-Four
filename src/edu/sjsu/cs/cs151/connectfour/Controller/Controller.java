@@ -15,7 +15,7 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  * Combines model and view 
  * 
  * @author Holly Lind
- * @since 04.05.2019
+ * @since 09.05.2019
  */
 public class Controller {
 
@@ -25,15 +25,24 @@ public class Controller {
 	 * @param view - the game's UI
 	 * @param model - the model of the game
 	 * @param queue - a queue of messages from the view of actions the user has taken
+	 * @postcondition - valves has an instance of every type of valve
 	 */
 	public Controller (View view, Model model, BlockingQueue<Message> queue) {
 		this.view = view;
 		this.model = model;
 		messageQueue = queue;
 		
+		valves.add(new StartLocalGameValve(view));
+		valves.add(new StartOnlineGameValve(view, queue));
+		valves.add(new OpenAboutValve(view));
+		valves.add(new CloseAboutValve(view));
+		valves.add(new CloseFrameValve());
+		valves.add(new ExitLoadingValve(view));
 		valves.add(new ColumnSelectedValve(model, view));
 		valves.add(new QuitGameValve(model, view));
-		valves.add(new DoNewGameValve(model, view));
+		valves.add(new RestartGameValve(model, view));
+		valves.add(new JoinAsClientValve(view));
+		valves.add(new JoinAsServerValve(view, queue));
 	}
 	
 	
@@ -47,7 +56,6 @@ public class Controller {
 		
 		while (response != ValveResponse.FINISH) {
 			try {
-				//System.out.println("trying to take from message queue");
 				message = (Message) messageQueue.take();
 			}
 			catch (InterruptedException e) {
@@ -55,10 +63,8 @@ public class Controller {
 			}
 			for (Valve valve : valves) {
 				response = valve.execute(message);
-				if (response != ValveResponse.MISS) {
-					//System.out.println("got some kind of valve");
+				if (response != ValveResponse.MISS) 
 					break;
-				}
 			}
 			//now the response is executed
 			//if response becomes finish, then loop stops
