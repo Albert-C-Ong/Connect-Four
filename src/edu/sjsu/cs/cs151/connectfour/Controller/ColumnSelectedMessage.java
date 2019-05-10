@@ -5,22 +5,19 @@ package edu.sjsu.cs.cs151.connectfour.Controller;
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
- * A Message for when a column is selected on the Connect
- * Four board
+ * A Message for when a column is selected on the Connect Four board
+ * See ColumnSelectedValve for controller functionality
  * 
  * @author Holly Lind
  * @since 04.05.2019
  */
 public class ColumnSelectedMessage extends Message {
 
-	/**
-	 * Constructor - initializes the message
-	 * @param columnSelected - x coordinate of the button pushed
-	 * @param player - the player that pushed the button
-	 */
-	public ColumnSelectedMessage(int columnSelected, String player) {
+	
+	public ColumnSelectedMessage(int columnSelected, String player, boolean localGame) {
 		this.columnSelected = columnSelected;
 		this.player = player;
+		this.localGame = localGame;
 	}
 
 
@@ -42,7 +39,13 @@ public class ColumnSelectedMessage extends Message {
 	}
 	
 	
+	public boolean getLocalGame() {
+		return localGame;
+	}
+	
+	
 	
 	private int columnSelected;
 	private String player;
+	private boolean localGame;
 }

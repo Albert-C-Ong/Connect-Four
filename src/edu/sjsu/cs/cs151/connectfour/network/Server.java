@@ -2,23 +2,24 @@ package edu.sjsu.cs.cs151.connectfour.network;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.BlockingQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourLoadingWindow;
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
+import edu.sjsu.cs.cs151.connectfour.Controller.Message;
+import edu.sjsu.cs.cs151.connectfour.View.View;
 
 public class Server extends Network {
 
 	private ServerSocket server;
 	private DatagramSocket socket;
 	
-	private ConnectFourMainWindow parent;
+	private View parent;
 	
 	// constructor
-	public Server(ConnectFourMainWindow parent) {
-		super(parent, "Player 1");
+	public Server(BlockingQueue<Message> queue, View parent) {
+		super(queue, "Player 1");
 		this.parent = parent;
 		setVisible(false);
 	}
@@ -32,7 +33,7 @@ public class Server extends Network {
 			while (true) {
 				// Trying to connect and have match
 				waitForConnection();
-				parent.viewServer(this);
+				parent.replacePanel(parent.getLoadingPanel(), this);
 				super.startRunning();
 			}
 		} catch (IOException ioException) {

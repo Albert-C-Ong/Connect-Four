@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.BlockingQueue;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,134 +14,29 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-import edu.sjsu.cs.cs151.connectfour.Model.GameInfo;
-import edu.sjsu.cs.cs151.connectfour.Model.GameState;
-import edu.sjsu.cs.cs151.connectfour.View.Button;
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourGameWindow;
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
+import edu.sjsu.cs.cs151.connectfour.Controller.*;
+import edu.sjsu.cs.cs151.connectfour.View.*;
 
-public class Network extends ConnectFourGameWindow {
+public class Network extends GamePanel {
 
-	private String player;
-	private ConnectFourMainWindow parent;
+	private View parent;
+	private BlockingQueue<Message> queue;
 	
 	protected ObjectOutputStream output;
 	protected ObjectInputStream input;
 	protected Socket connection;
 
-	public Network(ConnectFourMainWindow parent, String player) {
+	public Network(BlockingQueue<Message> queue, String player) {
 		
-		super(parent);
+		super(queue, false);
 		
-		this.player = player;
-		this.parent = parent;
+		setPlayer(player);
+		this.queue = queue;
 		
 		super.setBorder((Border) BorderFactory.createTitledBorder(player));
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent event) {
-	    
-	    // Retrieves the button that was pressed. 
-	    Button button = (Button)event.getSource();
-	    String button_name = button.getName() != null ? button.getName() : "";
-	    
-	    // If the restart button was pressed...
-	    if (button_name.equals("GAME_RESTART")) {
-
-	      JLabel message = new JLabel("Do you want to restart?");
-	      message.setFont(getMessageFont());
-	      message.setForeground(getMessageColor());
-	      
-	      // Prompts the player to ensure they want to restart. 
-	      int check_restart = 
-	          JOptionPane.showOptionDialog(this, 
-	                                       message, 
-	                                       "Restart", 
-	                                       JOptionPane.YES_NO_OPTION, 
-	                                       JOptionPane.INFORMATION_MESSAGE, 
-	                                       new ImageIcon(), 
-	                                       new String[] {"Yes", "No"}, 
-	                                       null); 
-	      
-	      // Restarts the game if the yes option was selected. 
-	      if (check_restart == JOptionPane.YES_OPTION) {
-	    	sendMove("GAME_RESTART");
-	        restart(); 
-	      }
-	      return;
-	    }
-	    
-	    
-	    // If the quit button was pressed...
-	    else if (button_name.equals("GAME_QUIT")) {
-	      
-	      JLabel message = new JLabel("Do you want to quit?");
-	      message.setFont(getMessageFont());
-	      message.setForeground(getMessageColor());
-	      
-	      // Prompts the player to ensure they want to quit. 
-	      int check_quit = 
-	          JOptionPane.showOptionDialog(this, 
-	                                       message, 
-	                                       "Quit", 
-	                                       JOptionPane.YES_NO_OPTION, 
-	                                       JOptionPane.INFORMATION_MESSAGE, 
-	                                       new ImageIcon(), 
-	                                       new String[] {"Yes", "No"}, 
-	                                       null); 
-	      
-	      // Exits to the menu window if the yes option was selected. 
-	      if (check_quit == JOptionPane.YES_OPTION) {
-	    	  
-	        restart();               // Resets the game logic.
-	        closeConnection();
-	        parent.viewMenuWindow();
-	        setVisible(false);// Returns to the menu window. 
-	      }
-	      return;
-	    }
-	    
-	    
-	    // If a tile on the grid was pressed...
-	    else {
-	    	
-	      int x_coord = button.getXCoord();
-	      int y_coord;
-
-	      GameInfo result = getGame().oneTurn(player, x_coord);
-	      
-	      if (result.getMostRecentlyPlacedTile() == null) {
-	    	//do nothing - no tile placed
-	      }
-	      
-	      else if (result.getCurrentState() == GameState.PLAYING) {
-	    	y_coord = result.getMostRecentlyPlacedTile().getYCoord();
-	        drawNewPiece(player, x_coord, y_coord, false);
-	        sendMove(x_coord+","+y_coord);
-	        return;
-	      }
-	      
-	      // If a player wins...
-	      else if (result.getCurrentState() == GameState.WIN) {
-	    	y_coord = result.getMostRecentlyPlacedTile().getYCoord();
-	        drawNewPiece(player, x_coord, y_coord, true);
-	        sendMove(x_coord+","+y_coord);
-	        openDialogBox(getGame().getCurrentPlayer() + " wins!", "Winner");
-	        return;
-	      }
-	      
-	      // If the game ends in a tie...
-	      else if (result.getCurrentState() == GameState.TIE) {
-	    	y_coord = result.getMostRecentlyPlacedTile().getYCoord();
-	        drawNewPiece(player, x_coord, y_coord, true);
-	        sendMove(x_coord+","+y_coord);
-	        openDialogBox("Tie!", "Tie");
-	        return;
-	      }
-	    }
-	  }
-
+	
 	// Start the server
 	public void startRunning() {
 		try {
@@ -158,7 +54,7 @@ public class Network extends ConnectFourGameWindow {
                     new String[] {"Main Menu"}, 
                     null);
 			
-			parent.viewMenuWindow();
+			parent.replacePanel(this, parent.getMenuPanel());
 			setVisible(false);
 		} catch (IOException ioException) {
 			System.out.println("Socket closed");
@@ -201,7 +97,7 @@ public class Network extends ConnectFourGameWindow {
 		} while (true);// end it
 	}
 
-	private void sendMove(String toSend) {
+	public void sendMove(String toSend) {
 
 		try {
 			output.writeObject(toSend);

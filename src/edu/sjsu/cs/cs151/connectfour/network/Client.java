@@ -3,16 +3,18 @@ package edu.sjsu.cs.cs151.connectfour.network;
 import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
+import java.util.concurrent.BlockingQueue;
 
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
+import edu.sjsu.cs.cs151.connectfour.Controller.Message;
+import edu.sjsu.cs.cs151.connectfour.View.View;
 
 public class Client extends Network {
 
 	private String serverIP;
 
 	// constructor
-	public Client(ConnectFourMainWindow parent) {
-		super(parent, "Player 2");
+	public Client(BlockingQueue<Message> queue) {
+		super(queue, "Player 2");
 	}
 
 	// connect to server
