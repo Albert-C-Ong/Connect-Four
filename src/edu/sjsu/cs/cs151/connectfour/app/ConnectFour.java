@@ -12,13 +12,28 @@
 
 package edu.sjsu.cs.cs151.connectfour.app;
 
-import edu.sjsu.cs.cs151.connectfour.View.ConnectFourMainWindow;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
+import edu.sjsu.cs.cs151.connectfour.Controller.Controller;
+import edu.sjsu.cs.cs151.connectfour.Controller.Message;
+import edu.sjsu.cs.cs151.connectfour.Model.Model;
+import edu.sjsu.cs.cs151.connectfour.View.View;
 
 public class ConnectFour {
 
-  public static void main(String[] args) {
+	public static BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+	public static View view;
+	public static Model model;
+	
 
-	  new ConnectFourMainWindow();
-  }
+	public static void main(String[] args) {
+		view = new View(queue);
+		model = new Model();
+		Controller game = new Controller(view, model, queue);
+		
+		game.mainLoop();
+		view.dispose();
+		queue.clear();
+	}
 }

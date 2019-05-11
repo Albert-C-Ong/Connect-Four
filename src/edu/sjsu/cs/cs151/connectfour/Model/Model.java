@@ -1,5 +1,3 @@
-
-
 /** Model.java
  * 
  * CS 151 Spring 2019
@@ -8,11 +6,12 @@
  * A class that deals with the model of Connect Four.
  * 
  * @author Holly Lind and Albert Ong
- * @since 17.04.2019
+ * @since 02.05.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.Model;
 
+import edu.sjsu.cs.cs151.connectfour.Controller.Controller;
 
 public class Model {
   
@@ -24,7 +23,7 @@ public class Model {
   public Model() {
     board = new Board();
     current_player = PLAYER_ONE;
-    activeGame = true;
+    currentState = GameState.PLAYING;
   }
   
   
@@ -35,33 +34,33 @@ public class Model {
    * @param columnSelected by the player
    * @return String indicating state of game
    */
-  public String oneTurn(String player, int columnSelected) {
-    if (!activeGame) {
-      return "game is already over";
+  public GameInfo oneTurn(String player, int columnSelected) {
+    if (currentState != GameState.PLAYING) {
+    	return new GameInfo(board, null, currentState, null);
     }
     else if (!player.equals(current_player)) {
-      return "wrong player; should be other player's turn";
+      return new GameInfo(board, current_player, currentState, null);
     }
       
     int rowSelected = board.checkColumnPlacement(columnSelected);
     
     if (rowSelected == 6) {
-      return "chosen column is full";
+      return new GameInfo(board, current_player, currentState, null);
     }
     
     board.setTile(columnSelected, rowSelected, player);
     
     if (checkWin(columnSelected, rowSelected)) {
-      activeGame = false;
-      return "winner at " + columnSelected + ", " + rowSelected;
+      currentState = GameState.WIN;
+      return new GameInfo(board, current_player, currentState, board.getTile(columnSelected, rowSelected));
     }
     else if (checkTie()) {
-      activeGame = false;
-      return "tie at " + columnSelected + ", " + rowSelected + "  ";
+      currentState = GameState.TIE;
+      return new GameInfo(board, current_player, currentState, board.getTile(columnSelected, rowSelected));
     }
     else {
       changePlayer();
-      return "piece placed at " + columnSelected + ", " + rowSelected;
+      return new GameInfo(board, current_player, currentState, board.getTile(columnSelected, rowSelected));
     }
   }
   
@@ -103,12 +102,12 @@ public class Model {
   
   /**
    * resets Connect Four Game (for new game)
-   * @postcondition gameBoard is reset, becomes player 1's turn
+   * @postcondition gameBoard is reset, becomes player 1's turn if client not active
    */
   public void newGame() {
     board.resetBoard();
-    current_player = PLAYER_ONE;
-    activeGame = true;
+    current_player = Model.getPlayerOne();
+    currentState = GameState.PLAYING;
   }
   
   
@@ -143,7 +142,7 @@ public class Model {
   
   private Board board;
   private String current_player;
-  private boolean activeGame;
+  private GameState currentState;
   private static final String PLAYER_ONE = "Player 1";
   private static final String PLAYER_TWO = "Player 2";
   

@@ -1,0 +1,88 @@
+package edu.sjsu.cs.cs151.connectfour.Model;
+
+import java.io.*;
+import java.net.*;
+import java.util.concurrent.BlockingQueue;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+import edu.sjsu.cs.cs151.connectfour.Controller.Message;
+import edu.sjsu.cs.cs151.connectfour.Controller.SetGameBorderMessage;
+import edu.sjsu.cs.cs151.connectfour.View.View;
+import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
+
+public class Server extends Network implements Runnable {
+
+	private ServerSocket server;
+	private DatagramSocket socket;
+	
+	@Override
+	public void run() {
+		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerOne());
+		broadcastMessage();
+		try {
+			ConnectFour.queue.put(new SetGameBorderMessage(Model.getPlayerOne()));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try {
+			server = new ServerSocket(port, 1); // 8888 is a dummy port for testing, this can be changed. The 2 is
+													// the maximum people waiting to connect.
+			while (true) {
+				// Trying to connect and have match
+				connection = server.accept();
+				super.startRunning();
+			}
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void closeConnection() {
+		
+		super.closeConnection();
+		try {
+			server.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	private void broadcastMessage() {
+		try {
+			// Keep a socket open to listen to all the UDP trafic that is destined for this port
+			socket = new DatagramSocket(port, InetAddress.getByName("0.0.0.0"));
+			socket.setBroadcast(true);
+
+			while (true) {
+				
+				// Receive a packet
+				byte[] recvBuf = new byte[15000];
+				DatagramPacket packet = new DatagramPacket(recvBuf, recvBuf.length);
+
+				// Receive packet
+				socket.receive(packet);
+				
+				// See if the packet holds the right command (message)
+				String message = new String(packet.getData()).trim();
+				
+				if (message.equals("DISCOVER_FUIFSERVER_REQUEST")) {
+					
+					byte[] sendData = "DISCOVER_FUIFSERVER_RESPONSE".getBytes();
+
+					// Send a response
+					DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, packet.getAddress(),
+							packet.getPort());
+					socket.send(sendPacket);
+					socket.close();
+					return;
+				}
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+}
