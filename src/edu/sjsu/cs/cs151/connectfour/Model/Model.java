@@ -11,6 +11,7 @@
 
 package edu.sjsu.cs.cs151.connectfour.Model;
 
+import edu.sjsu.cs.cs151.connectfour.Controller.Controller;
 
 public class Model {
   
@@ -101,11 +102,11 @@ public class Model {
   
   /**
    * resets Connect Four Game (for new game)
-   * @postcondition gameBoard is reset, becomes player 1's turn
+   * @postcondition gameBoard is reset, becomes player 1's turn if client not active
    */
   public void newGame() {
     board.resetBoard();
-    current_player = PLAYER_ONE;
+    current_player = Model.getPlayerOne();
     currentState = GameState.PLAYING;
   }
   

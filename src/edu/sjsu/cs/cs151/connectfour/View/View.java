@@ -23,7 +23,8 @@ import java.util.concurrent.*;
 import javax.swing.*;
 
 import edu.sjsu.cs.cs151.connectfour.Controller.*;
-import edu.sjsu.cs.cs151.connectfour.network.*;
+import edu.sjsu.cs.cs151.connectfour.Model.Client;
+import edu.sjsu.cs.cs151.connectfour.Model.Server;
 
 public class View extends JFrame implements ActionListener {
 
@@ -33,9 +34,6 @@ public class View extends JFrame implements ActionListener {
 	private GamePanel game_window;
 	private LoadingPanel loading_window;
 	private BlockingQueue<Message> queue;
-	private Client c;
-	private Server s;
-	
 	
 	/* Constructor for the ConnectFourMainWindow object */
 	public View(BlockingQueue<Message> queue) {
@@ -96,8 +94,14 @@ public class View extends JFrame implements ActionListener {
 
 		// If the menu online play button was pressed.
 		else if (button_name.equals("MENU_ONLINE_PLAY")) {
+			
+			int hostGame = JOptionPane.showOptionDialog(this, "Choose an option", "Host or Join?", JOptionPane.YES_NO_CANCEL_OPTION, 
+							   JOptionPane.INFORMATION_MESSAGE, null, new String[] {"New Game",  "Join Game"}, null);
 	    	try {
-	    		queue.put(new StartOnlineGameMessage());
+	    		if (hostGame == 0) queue.put(new StartServerMessage());
+	    		else if (hostGame == 1) queue.put(new JoinAsClientMessage());
+	    		else return;
+	    		replacePanel(menu_window, loading_window);
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
@@ -145,7 +149,6 @@ public class View extends JFrame implements ActionListener {
 		}
 	}
 	
-	
 	public MenuPanel getMenuPanel() {
 		return menu_window;
 	}
@@ -165,27 +168,6 @@ public class View extends JFrame implements ActionListener {
 		return loading_window;
 	}
 	
-	
-	public Client getClient() {
-		return c;
-	}
-	
-	
-	public void setClient(Client c) {
-		this.c = c;
-	}
-	
-	
-	public Server getServer() {
-		return s;
-	}
-	
-	
-	public void setServer(Server s) {
-		this.s = s;
-	}
-	
-	
 	public void joinOnlineDialogBox(String hostName) {
 		int join = JOptionPane.showOptionDialog(this, "Connect to " + hostName + "?", "Match found",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(),
@@ -201,7 +183,6 @@ public class View extends JFrame implements ActionListener {
 		}
 	}
 	
-	
 	public void hostOnlineDialogBox() {
 		int host = JOptionPane.showOptionDialog(this, "No matches found. Host game?", "Error",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(),
@@ -209,7 +190,7 @@ public class View extends JFrame implements ActionListener {
 		
 		if (host == 0) {
 	    	try {
-	    		queue.put(new JoinAsServerMessage());
+	    		queue.put(new StartServerMessage());
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();

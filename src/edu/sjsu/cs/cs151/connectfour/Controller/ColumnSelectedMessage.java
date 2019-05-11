@@ -13,11 +13,9 @@ package edu.sjsu.cs.cs151.connectfour.Controller;
  */
 public class ColumnSelectedMessage extends Message {
 
-	
-	public ColumnSelectedMessage(int columnSelected, String player, boolean localGame) {
+	public ColumnSelectedMessage(int columnSelected, String player) {
 		this.columnSelected = columnSelected;
 		this.player = player;
-		this.localGame = localGame;
 	}
 
 
@@ -38,14 +36,6 @@ public class ColumnSelectedMessage extends Message {
 		return player;
 	}
 	
-	
-	public boolean getLocalGame() {
-		return localGame;
-	}
-	
-	
-	
 	private int columnSelected;
 	private String player;
-	private boolean localGame;
 }

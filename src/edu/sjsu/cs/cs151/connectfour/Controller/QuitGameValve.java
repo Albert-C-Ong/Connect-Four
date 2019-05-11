@@ -32,28 +32,22 @@ public class QuitGameValve implements Valve {
 		
 		//actions in view
 		QuitGameMessage specificMessage = (QuitGameMessage) message;
-		
+
 		//if local game, just replace game panel with menu
-		if (specificMessage.getLocalGame()) {
-			view.getGamePanel().clearBoard();
-			view.replacePanel(view.getGamePanel(), view.getMenuPanel());
-		}
+		view.getGamePanel().clearBoard();
 		
-		//if online game, close quitting player's connection + replace w/ menu panel
-		else {
-			if (specificMessage.getPlayer() == Model.getPlayerOne()) {
-				view.getServer().closeConnection();
-				view.replacePanel(view.getServer(), view.getMenuPanel());
-			}
-			else {
-				view.getClient().closeConnection(); 
-				view.replacePanel(view.getClient(), view.getMenuPanel());
-			}
+//		//if online game, close quitting player's connection + replace w/ menu panel
+		if (!specificMessage.getLocalGame()) {
+			if (Controller.SERVER.getActiveStatus())
+				Controller.SERVER.closeConnection();
+				
+			else Controller.CLIENT.closeConnection();
 		}
+
+		view.replacePanel(view.getGamePanel(), view.getMenuPanel());
 		
 		return ValveResponse.EXECUTED;
 	}
-	
 	
 	private Model model;
 	private View view;

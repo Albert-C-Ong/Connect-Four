@@ -31,8 +31,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 		//if it's a local game, then start with player one
 		//if it's a network game, player needs to be set in client/server
-		if (localGame)
-			player = Model.getPlayerOne();
+		player = Model.getPlayerOne();
 		
 		// Initializes variables
 		this.queue = queue;
@@ -127,7 +126,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	    //tile was pressed
 	    if (button_name == null) {
 	    	try {
-	    		queue.put(new ColumnSelectedMessage(button.getXCoord(), player, localGame));
+	    		queue.put(new ColumnSelectedMessage(button.getXCoord(), player));
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
@@ -173,7 +172,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		player_text.setIcon(new ImageIcon(url_player_text));
 		
 		//if it isn't an online game, then swap players
-		if (localGame) {
+		if (!(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())) {
 			if (player.equals(Model.getPlayerOne()))
 				player = Model.getPlayerTwo();
 			else
@@ -221,7 +220,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		//if decided not to play again
 		if (play_again == JOptionPane.NO_OPTION) {
 	    	try {
-	    		queue.put(new QuitGameMessage(player, localGame));
+	    		queue.put(new QuitGameMessage(!(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
@@ -231,7 +230,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		//if decided to play again
 		else {
 	    	try {
-	    		queue.put(new RestartGameMessage(player, localGame));
+	    		queue.put(new RestartGameMessage(player, !(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
@@ -269,7 +268,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		//player confirmed that they wanted to quit
 		else if (messageLabel.equals("Quit")) {
 	    	try {
-	    		queue.put(new QuitGameMessage(player, localGame));
+	    		queue.put(new QuitGameMessage(!(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
@@ -279,7 +278,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		//player confirmed that they wanted to restart
 		else {
 	    	try {
-	    		queue.put(new RestartGameMessage(player, localGame));
+	    		queue.put(new RestartGameMessage(player, !(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
@@ -297,8 +296,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	    player_text.setIcon(new ImageIcon(url_player_text));
 	    
 	    //if it's a local game, reset to player 1's turn
-	    if (localGame)
-	    	player = Model.getPlayerOne();
+	    player = Controller.CLIENT.getActiveStatus() ? Model.getPlayerTwo() : Model.getPlayerOne();
 	    
 		//gets rid of tiles on board
 		for (int x = 0; x < Board.getColumns(); x++) {
@@ -325,8 +323,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		return message_color;
 	}
 	
-	
-	  
 	private ArrayList<ArrayList<Button>> buttons;
 	URL url_initial_player_text = View.class.getResource("/resources/game_window_player_1_turn_text.png");
 	private JLabel player_text = new JLabel(new ImageIcon(url_initial_player_text));
