@@ -19,7 +19,7 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class StartServerValve implements Valve {
 
-	
+	public static Thread thread;
 	public StartServerValve(View view) {
 		this.view = view;
 	}
@@ -34,7 +34,7 @@ public class StartServerValve implements Valve {
 		//actions in view
 		
 		//Thread
-		Thread thread = new Thread(Controller.SERVER);
+		thread = new Thread(Controller.SERVER);
 		thread.start();
 		
 		return ValveResponse.EXECUTED;

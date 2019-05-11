@@ -30,7 +30,7 @@ public class ExitLoadingValve implements Valve {
 		//close server - ??????????
 		if (Controller.SERVER.getActiveStatus()) Controller.SERVER.closeConnection();
 		else if (Controller.CLIENT.getActiveStatus()) Controller.CLIENT.closeConnection();
-		
+		StartServerValve.thread.stop();
 		//replace loading panel with menu
 		view.replacePanel(view.getLoadingPanel(), view.getMenuPanel());
 		
