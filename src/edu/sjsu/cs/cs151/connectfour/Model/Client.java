@@ -24,6 +24,7 @@ public class Client extends Network implements Runnable {
 		}
 		try {
 			//Connect to Server
+			isActive = true;
 			serverIP = findServer();
 			if(serverIP == null) {
 				return;

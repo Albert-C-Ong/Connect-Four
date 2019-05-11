@@ -20,6 +20,7 @@ public class Server extends Network implements Runnable {
 	@Override
 	public void run() {
 		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerOne());
+		isActive = true;
 		broadcastMessage();
 		try {
 			ConnectFour.queue.put(new SetGameBorderMessage(Model.getPlayerOne()));
@@ -41,12 +42,14 @@ public class Server extends Network implements Runnable {
 	
 	@Override
 	public void closeConnection() {
-		
-		super.closeConnection();
 		try {
-			server.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			super.closeConnection();
+			try {
+				server.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch(NullPointerException nullEx) {	
 		}
 	}
 	

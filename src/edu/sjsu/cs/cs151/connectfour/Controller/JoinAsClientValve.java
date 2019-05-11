@@ -29,8 +29,6 @@ public class JoinAsClientValve implements Valve {
 		//actions in model - none
 		
 		//actions in view
-		//replace menu panel w/ client
-		view.replacePanel(view.getMenuPanel(), view.getGamePanel());
 		
 		//Thread stuff
 		Thread thread = new Thread(Controller.CLIENT);

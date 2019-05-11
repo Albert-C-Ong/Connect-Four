@@ -11,7 +11,7 @@ import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
 
 public class Network {
 	
-	private boolean isActive = false;
+	protected boolean isActive = false;
 	protected ObjectOutputStream output;
 	protected ObjectInputStream input;
 	protected Socket connection;
@@ -91,6 +91,7 @@ public class Network {
 			connection.close();
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
+		} catch (NullPointerException nullEx) {
 		}
 		isActive = false;
 	}

@@ -96,16 +96,17 @@ public class View extends JFrame implements ActionListener {
 		// If the menu online play button was pressed.
 		else if (button_name.equals("MENU_ONLINE_PLAY")) {
 			
-			boolean hostGame = JOptionPane.showOptionDialog(this, "Choose an option", "Host or Join?", JOptionPane.YES_NO_OPTION, 
-							   JOptionPane.INFORMATION_MESSAGE, null, new String[] {"New Game",  "Join Game"}, null) == 0;
+			int hostGame = JOptionPane.showOptionDialog(this, "Choose an option", "Host or Join?", JOptionPane.YES_NO_CANCEL_OPTION, 
+							   JOptionPane.INFORMATION_MESSAGE, null, new String[] {"New Game",  "Join Game"}, null);
 	    	try {
-	    		if (hostGame) queue.put(new StartServerMessage());
-	    		else queue.put(new JoinAsClientMessage());
+	    		if (hostGame == 0) queue.put(new StartServerMessage());
+	    		else if (hostGame == 1) queue.put(new JoinAsClientMessage());
+	    		else return;
+	    		replacePanel(menu_window, loading_window);
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
 	    	}
-	    	replacePanel(menu_window, loading_window);
 		}
 
 		// If the menu about button was pressed...
@@ -141,8 +142,7 @@ public class View extends JFrame implements ActionListener {
 		// If the loading exit button was pressed...
 		else if (button_name.equals("LOADING_EXIT")) {
 	    	try {
-	    		queue.put(new ExitLoadingMessage(Controller.SERVER.getActiveStatus() ?
-	    										 Controller.SERVER : Controller.CLIENT));
+	    		queue.put(new ExitLoadingMessage());
 	    	}
 	    	catch (InterruptedException exception) {
 	    		exception.printStackTrace();
