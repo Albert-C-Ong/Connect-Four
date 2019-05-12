@@ -3,10 +3,8 @@ package edu.sjsu.cs.cs151.connectfour.Model;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.BlockingQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 import edu.sjsu.cs.cs151.connectfour.Controller.Message;
 import edu.sjsu.cs.cs151.connectfour.Controller.SetGameBorderMessage;
 import edu.sjsu.cs.cs151.connectfour.View.View;
@@ -25,6 +23,7 @@ public class Server extends Network implements Runnable {
 		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerOne());
 		isActive = true;
 		broadcastMessage();
+		
 		try {
 			ConnectFour.queue.put(new SetGameBorderMessage(Model.getPlayerOne()));
 		} catch (InterruptedException e) {

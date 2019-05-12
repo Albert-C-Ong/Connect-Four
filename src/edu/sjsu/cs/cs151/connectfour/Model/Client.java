@@ -4,11 +4,11 @@ import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
 import java.util.concurrent.BlockingQueue;
-
 import edu.sjsu.cs.cs151.connectfour.Controller.Message;
 import edu.sjsu.cs.cs151.connectfour.Controller.SetGameBorderMessage;
 import edu.sjsu.cs.cs151.connectfour.View.View;
 import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
+
 
 public class Client extends Network implements Runnable {
 
@@ -20,6 +20,7 @@ public class Client extends Network implements Runnable {
 	@Override
 	public void run() {
 		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerTwo());
+
 		try {
 			ConnectFour.queue.put(new SetGameBorderMessage(Model.getPlayerTwo()));
 		} catch (InterruptedException e) {

@@ -27,7 +27,7 @@ public class ColumnSelectedValve implements Valve {
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != ColumnSelectedMessage.class)
 			return ValveResponse.MISS;
-
+      
 		// actions in model
 		ColumnSelectedMessage specificMessage = (ColumnSelectedMessage) message;
 		String player = specificMessage.getPlayer();

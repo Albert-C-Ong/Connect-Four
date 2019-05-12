@@ -1,3 +1,4 @@
+
 package edu.sjsu.cs.cs151.connectfour.Model;
 
 import java.util.ArrayList;
@@ -7,21 +8,23 @@ import java.util.ArrayList;
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
- * A class the represents the board Connect Four
- * is played on. Inherits a 2D ArrayList of Tiles.
+ * A class the represents the board Connect Four is played on.
+ * Implements a SINGLETON pattern. 
  * 
  * @author Holly Lind
- * @since 17.4.2019
+ * @since 11.05.2019
  */
-public class Board {
+public final class Board {
 
+  // A SINGLETON instance of Board. 
+  private static final Board instance = new Board(); 
   
   /**
    * creates a Board
    * @postcondition tiles initiated with BOARD_COLUMNS and BOARD_ROWS
    * all Tiles are colorless and filled is false
    */
-  public Board() {
+  private Board() {
     tiles = new ArrayList<ArrayList<Tile>>();
     for (int i = 0; i < BOARD_COLUMNS; i++) {
       tiles.add(new ArrayList<Tile>());
@@ -126,6 +129,12 @@ public class Board {
     return tiles.get(x).get(y);
   }
   
+  /**
+   * @return The singleton instance of Board. 
+   */
+  public static Board getInstance() {
+    return instance; 
+  }
   
   private ArrayList<ArrayList<Tile>> tiles;
   private static final int BOARD_COLUMNS = 7;

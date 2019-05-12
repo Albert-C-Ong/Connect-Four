@@ -4,8 +4,7 @@
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
- * Menu window for Connect Four. 
- * (renamed from ConnectFourMenuWindow)
+ * Menu panel for Connect Four. 
  * 
  * @author Albert Ong
  * @since 09.05.2019
@@ -15,13 +14,11 @@ package edu.sjsu.cs.cs151.connectfour.View;
 
 import java.awt.*;
 import java.net.URL;
-
 import javax.swing.*;
 
 
 public class MenuPanel extends JPanel {
 
-  
   public MenuPanel(View parent) {
     
     setBackground(Color.WHITE);
@@ -33,7 +30,7 @@ public class MenuPanel extends JPanel {
     gbc.gridx = 0;
     gbc.insets = new Insets(0, 0, 20, 0);
     
-    URL url1 = View.class.getResource("/resources/ConnectFour_logo.png");
+    URL url1 = MenuPanel.class.getResource("/Connect_Four_logo.png");
     JLabel logo = new JLabel(new ImageIcon(url1));
     logo.setAlignmentX(Component.CENTER_ALIGNMENT);
     add(logo, gbc);
@@ -60,7 +57,7 @@ public class MenuPanel extends JPanel {
       button.setBorderPainted(false);
       
       // Finds the path to the image icons.
-      String image_path = "/resources/menu_button_" + name.toLowerCase();
+      String image_path = "/menu_button_" + name.toLowerCase();
       String button_select_image = image_path + "_select.png";
       String button_deselect_image = image_path + "_deselect.png";
       

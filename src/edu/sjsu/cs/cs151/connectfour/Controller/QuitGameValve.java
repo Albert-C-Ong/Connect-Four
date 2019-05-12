@@ -49,7 +49,6 @@ public class QuitGameValve implements Valve {
 		return ValveResponse.EXECUTED;
 	}
 	
-	
 	private Model model;
 	private View view;
 

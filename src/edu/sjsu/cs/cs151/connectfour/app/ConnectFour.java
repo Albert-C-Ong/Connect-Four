@@ -24,8 +24,7 @@ public class ConnectFour {
 
 	public static BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
 	public static View view;
-	public static Model model;
-	
+	public static Model model;	
 
 	public static void main(String[] args) {
 		view = new View(queue);
