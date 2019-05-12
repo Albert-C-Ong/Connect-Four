@@ -17,6 +17,9 @@ public class Server extends Network implements Runnable {
 	private ServerSocket server;
 	private DatagramSocket socket;
 	
+	/**
+	 * Starts server and accepts connection request from client.
+	 */
 	@Override
 	public void run() {
 		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerOne());
@@ -36,10 +39,12 @@ public class Server extends Network implements Runnable {
 				super.startRunning();
 			}
 		} catch (IOException ioException) {
-			ioException.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Closes server
+	 */
 	@Override
 	public void closeConnection() {
 		try {
@@ -53,7 +58,9 @@ public class Server extends Network implements Runnable {
 		}
 	}
 	
-
+	/**
+	 * Broadcasts message to all UDP ports and waits for reply from client.
+	 */
 	private void broadcastMessage() {
 		try {
 			// Keep a socket open to listen to all the UDP trafic that is destined for this port

@@ -17,7 +17,9 @@ public class Network {
 	protected Socket connection;
 	protected int port = 8888;
 
-	// Start the server
+	/**
+	 * General setup of network and begins match.
+	 */
 	public void startRunning() {
 		try {
 			setupStreams();
@@ -31,14 +33,16 @@ public class Network {
 				e.printStackTrace();
 			}
 		} catch (IOException ioException) {
-			System.out.println("Socket closed");
 		}
 		finally {
 			closeConnection();
 		}
 	}
 
-	// Establish connections
+	/**
+	 * Initialize input and output streams
+	 * @throws IOException
+	 */
 	public void setupStreams() throws IOException {
 
 		output = new ObjectOutputStream(connection.getOutputStream());
@@ -46,11 +50,15 @@ public class Network {
 		input = new ObjectInputStream(connection.getInputStream());
 	}
 
+	/**
+	 * Reads input and passes to valve.
+	 * @throws IOException
+	 */
 	public void whilePlaying() throws IOException {
 		do {
 			try {
 				GameMoveMessage loc = (GameMoveMessage) input.readObject();
-				boolean restart = loc.restart;
+				boolean restart = loc.getRestart();
 				
 				if (restart) {
 					try {
@@ -64,7 +72,7 @@ public class Network {
 					String player = this.getClass().getSimpleName().equals("Client") ?
 							Model.getPlayerOne() : Model.getPlayerTwo();
 					try {
-						ConnectFour.queue.put(new ColumnSelectedMessage(loc.x, player));
+						ConnectFour.queue.put(new ColumnSelectedMessage(loc.getXCoord(), player));
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -75,6 +83,10 @@ public class Network {
 		} while (true);// end it
 	}
 
+	/**
+	 * Sends move to other computer.
+	 * @param move, the game move to send
+	 */
 	public void sendMove(GameMoveMessage move) {
 		try {
 			output.writeObject(move);
@@ -83,7 +95,10 @@ public class Network {
 			ioException.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Closes the input/output streams.
+	 */
 	public void closeConnection() {
 		try {
 			output.close();
@@ -96,6 +111,10 @@ public class Network {
 		isActive = false;
 	}
 	
+	/**
+	 * Getter for isActive
+	 * @return isActive - current status of network
+	 */
 	public boolean getActiveStatus() {
 		return isActive;
 	}

@@ -14,12 +14,18 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class ExitLoadingValve implements Valve {
 
-	
+	/**
+	 * Ctor. Passes view to local variable
+	 * @param View
+	 */
 	public ExitLoadingValve(View view) {
 		this.view = view;
 	}
 	
-	
+	/**
+	 * Closes connection if exit button is pressed in loading screen.
+	 * @return {@link ValveResponse}
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != ExitLoadingMessage.class)
 			return ValveResponse.MISS;
@@ -30,7 +36,7 @@ public class ExitLoadingValve implements Valve {
 		//close server - ??????????
 		if (Controller.SERVER.getActiveStatus()) Controller.SERVER.closeConnection();
 		else if (Controller.CLIENT.getActiveStatus()) Controller.CLIENT.closeConnection();
-		StartServerValve.thread.stop();
+		
 		//replace loading panel with menu
 		view.replacePanel(view.getLoadingPanel(), view.getMenuPanel());
 		
