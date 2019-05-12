@@ -6,7 +6,7 @@
  * A class that deals with the model of Connect Four.
  * 
  * @author Holly Lind and Albert Ong
- * @since 02.05.2019
+ * @since 11.05.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.Model;
@@ -21,7 +21,7 @@ public class Model {
    * @postcondition Board is initialized, starts with player 1
    */
   public Model() {
-    board = new Board();
+    board = Board.getInstance();
     current_player = PLAYER_ONE;
     currentState = GameState.PLAYING;
   }
@@ -36,7 +36,7 @@ public class Model {
    */
   public GameInfo oneTurn(String player, int columnSelected) {
     if (currentState != GameState.PLAYING) {
-    	return new GameInfo(board, null, currentState, null);
+      return new GameInfo(board, null, currentState, null);
     }
     else if (!player.equals(current_player)) {
       return new GameInfo(board, current_player, currentState, null);
