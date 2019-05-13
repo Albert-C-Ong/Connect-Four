@@ -36,7 +36,7 @@ public class RestartGameValve implements Valve {
 		//if local game, just clear board
 		view.getGamePanel().clearBoard();
 		
-		if (!specificMessage.getLocalGame()) {
+		if (!(specificMessage.getLocalGame() || specificMessage.getEndGame())) {
 			
 			if (Controller.SERVER.getActiveStatus())
 				Controller.SERVER.sendMove(new GameMoveMessage(true));
