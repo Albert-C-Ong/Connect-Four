@@ -1,6 +1,7 @@
 
 # Connect-Four
-A board game created for CS 151: Object-Oriented Design.
+A board game created for CS 151: Object-Oriented Design. <br>
+Supports both local play as well as online multiplayer across private networks and mobile hotspots. 
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Anferensis/Connect-Four/master/images/Connect_Four_icon_and_logo.png" width=300/>
