@@ -18,7 +18,12 @@ import javax.swing.*;
 
 
 public class MenuPanel extends JPanel {
-
+	
+	
+  /**
+   * Ctor - initializes panel
+   * @param parent - view that contains menu panel
+   */
   public MenuPanel(View parent) {
     
     setBackground(Color.WHITE);

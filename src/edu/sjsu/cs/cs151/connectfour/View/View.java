@@ -4,8 +4,7 @@
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
- * Main window for Connect Four. 
- * (renamed from ConnectFourMainWindow)
+ * Main frame for Connect Four. 
  * 
  * @author Albert Ong, Holly Lind
  * @since 09.05.2019
@@ -28,14 +27,11 @@ import edu.sjsu.cs.cs151.connectfour.Model.Server;
 
 public class View extends JFrame implements ActionListener {
 
-  
-  private MenuPanel menu_window;
-  private AboutPanel about_window;
-  private GamePanel game_window;
-  private LoadingPanel loading_window;
-  private BlockingQueue<Message> queue;
-  
-  /* Constructor for the ConnectFourMainWindow object */
+ 
+  /**
+   * Ctor - intializes the window and panels
+   * @param queue - message queue from controller
+   */
   public View(BlockingQueue<Message> queue) {
     this.queue = queue;
     
@@ -67,6 +63,11 @@ public class View extends JFrame implements ActionListener {
   }
 
   
+  /**
+   * Replaces oldPanel with newPanel
+   * @param oldPanel - panel to become invisible
+   * @param newPanel - panel to become visible
+   */
   public void replacePanel(JPanel oldPanel, JPanel newPanel) {
     oldPanel.setVisible(false);
     
@@ -75,7 +76,9 @@ public class View extends JFrame implements ActionListener {
   }
   
   
-  /* The method that activates whenever a button is pressed. */
+  /**
+   * Deals with user inputs 
+   */
   public void actionPerformed(ActionEvent event) {
 
     // Retrieves the button object that was pressed.
@@ -149,25 +152,46 @@ public class View extends JFrame implements ActionListener {
     }
   }
   
+  /**
+   * Access method for menu panel
+   * @return menu_window
+   */
   public MenuPanel getMenuPanel() {
     return menu_window;
   }
   
   
+  /**
+   * Access method for game panel
+   * @return game_window
+   */
   public GamePanel getGamePanel() {
     return game_window;
   }
   
   
+  /**
+   * Access method for about panel
+   * @return about_window
+   */
   public AboutPanel getAboutPanel() {
     return about_window;
   }
   
   
+  /**
+   * Access method for loading panel
+   * @return loading_window
+   */
   public LoadingPanel getLoadingPanel() {
     return loading_window;
   }
   
+  
+  /**
+   * Opens dialog box for joining an online game
+   * @param hostName - name of host's server
+   */
   public void joinOnlineDialogBox(String hostName) {
     int join = JOptionPane.showOptionDialog(this, "Connect to " + hostName + "?", "Match found",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(),
@@ -183,6 +207,10 @@ public class View extends JFrame implements ActionListener {
     }
   }
   
+  
+  /**
+   * Opens dialog box for hosting an online game
+   */
   public void hostOnlineDialogBox() {
     int host = JOptionPane.showOptionDialog(this, "No matches found. Host game?", "Error",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(),
@@ -197,4 +225,11 @@ public class View extends JFrame implements ActionListener {
         }
     } 
   }
+  
+  
+  private MenuPanel menu_window;
+  private AboutPanel about_window;
+  private GamePanel game_window;
+  private LoadingPanel loading_window;
+  private BlockingQueue<Message> queue;
 }

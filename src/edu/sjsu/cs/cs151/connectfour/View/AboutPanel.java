@@ -20,7 +20,10 @@ import javax.swing.*;
 
 public class AboutPanel extends JPanel {
   
-  
+  /**
+   * Ctor - initializes the panel
+   * @param parent - the view that contains the panel
+   */
   public AboutPanel(View parent) {
     
     // Sets the background color to white. 

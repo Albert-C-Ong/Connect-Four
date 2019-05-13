@@ -15,11 +15,18 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
 public class CloseAboutValve implements Valve {
 
 	
+	/**
+	 * Ctor - initializes view
+	 * @param view
+	 */
 	public CloseAboutValve(View view) {
 		this.view = view;
 	}
 	
 	
+	/**
+	 * Replaces about panel with menu panel
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != CloseAboutMessage.class)
 			return ValveResponse.MISS;

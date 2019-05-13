@@ -1,7 +1,5 @@
 package edu.sjsu.cs.cs151.connectfour.Controller;
 
-import edu.sjsu.cs.cs151.connectfour.Model.Network;
-
 /** ExitLoadingMessage.java
  * 
  * CS 151 Spring 2019

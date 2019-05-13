@@ -33,7 +33,7 @@ public class ExitLoadingValve implements Valve {
 		//actions in model - none
 		
 		//actions in view
-		//close server - ??????????
+		//close network
 		if (Controller.SERVER.getActiveStatus()) Controller.SERVER.closeConnection();
 		else if (Controller.CLIENT.getActiveStatus()) Controller.CLIENT.closeConnection();
     

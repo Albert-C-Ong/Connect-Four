@@ -22,7 +22,10 @@ import edu.sjsu.cs.cs151.connectfour.View.animation.*;
  */
 public class LoadingPanel extends JPanel {
 
-	
+	/**
+	 * Ctor - initializes panel
+	 * @param parent - view that contains panel
+	 */
 	public LoadingPanel(View parent) {
 		
 		// Sets the background color to white. 

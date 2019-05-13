@@ -13,13 +13,23 @@ package edu.sjsu.cs.cs151.connectfour.Controller;
  */
 public class QuitGameMessage extends Message {
 	
+	/**
+	 * Ctor. Initializes localGame
+	 * @param localGame
+	 */
 	public QuitGameMessage(boolean localGame) {
 		this.localGame = localGame;
 	}
 	
+	
+	/**
+	 * Access method for localGame
+	 * @return localGame
+	 */
 	public boolean getLocalGame() {
 		return localGame;
 	}
+	
 	
 	private boolean localGame;
 }

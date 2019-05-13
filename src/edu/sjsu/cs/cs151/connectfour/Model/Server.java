@@ -10,6 +10,14 @@ import edu.sjsu.cs.cs151.connectfour.Controller.SetGameBorderMessage;
 import edu.sjsu.cs.cs151.connectfour.View.View;
 import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
 
+/** Server.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * @author Krish Ghiya
+ * @since 12.05.2019
+ */
 public class Server extends Network implements Runnable {
 
 	private ServerSocket server;

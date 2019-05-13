@@ -17,12 +17,21 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class QuitGameValve implements Valve {
 
+	/**
+	 * Ctor. Initializes variables
+	 * @param model
+	 * @param view
+	 */
 	public QuitGameValve(Model model, View view) {
 		this.model = model;
 		this.view = view;
 	}
 	
 	
+	/**
+	 * Returns to menu panel
+	 * If online game, notifies other player that this player quit
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != QuitGameMessage.class)
 			return ValveResponse.MISS;
@@ -36,7 +45,7 @@ public class QuitGameValve implements Valve {
 		//if local game, just replace game panel with menu
 		view.getGamePanel().clearBoard();
 		
-//		//if online game, close quitting player's connection + replace w/ menu panel
+		//if online game, close quitting player's connection + replace w/ menu panel
 		if (!specificMessage.getLocalGame()) {
 			if (Controller.SERVER.getActiveStatus())
 				Controller.SERVER.closeConnection();
