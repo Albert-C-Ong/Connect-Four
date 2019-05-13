@@ -13,9 +13,10 @@ package edu.sjsu.cs.cs151.connectfour.Controller;
  */
 public class RestartGameMessage extends Message {
 
-	public RestartGameMessage(String player, boolean localGame) {
+	public RestartGameMessage(String player, boolean localGame, boolean endGame) {
 		this.player = player;
 		this.localGame = localGame;
+		this.endGame = endGame;
 	}
 	
 	
@@ -28,7 +29,11 @@ public class RestartGameMessage extends Message {
 		return localGame;
 	}
 	
+	public boolean getEndGame() {
+		return endGame;
+	}
 	
 	private String player;
 	private boolean localGame;
+	private boolean endGame;
 }

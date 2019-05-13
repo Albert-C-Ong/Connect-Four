@@ -220,7 +220,7 @@ public class GamePanel extends JPanel implements ActionListener {
     //if decided not to play again
     if (play_again == JOptionPane.NO_OPTION) {
         try {
-          queue.put(new QuitGameMessage(!(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
+          queue.put(new QuitGameMessage(returnLocalGame()));
         }
         catch (InterruptedException exception) {
           exception.printStackTrace();
@@ -230,7 +230,7 @@ public class GamePanel extends JPanel implements ActionListener {
     //if decided to play again
     else {
         try {
-          queue.put(new RestartGameMessage(player, !(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
+          queue.put(new RestartGameMessage(player, returnLocalGame(), true));
         }
         catch (InterruptedException exception) {
           exception.printStackTrace();
@@ -268,7 +268,7 @@ public class GamePanel extends JPanel implements ActionListener {
     //player confirmed that they wanted to quit
     else if (messageLabel.equals("Quit")) {
         try {
-          queue.put(new QuitGameMessage(!(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
+          queue.put(new QuitGameMessage(returnLocalGame()));
         }
         catch (InterruptedException exception) {
           exception.printStackTrace();
@@ -278,7 +278,7 @@ public class GamePanel extends JPanel implements ActionListener {
     //player confirmed that they wanted to restart
     else {
         try {
-          queue.put(new RestartGameMessage(player, !(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus())));
+          queue.put(new RestartGameMessage(player, returnLocalGame(), false));
         }
         catch (InterruptedException exception) {
           exception.printStackTrace();
@@ -308,6 +308,9 @@ public class GamePanel extends JPanel implements ActionListener {
     }
   }
   
+  private boolean returnLocalGame() {
+	  return !(Controller.SERVER.getActiveStatus() || Controller.CLIENT.getActiveStatus());
+  }
   
   public void setPlayer(String player) {
     this.player = player;
