@@ -74,6 +74,7 @@ public class Controller {
 			//now the response is executed
 			//if response becomes finish, then loop stops
 		}
+		System.exit(0);
 	}
 	
 	private BlockingQueue<Message> messageQueue;
