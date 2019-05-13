@@ -50,6 +50,7 @@ public class Client extends Network implements Runnable {
 	/**
 	 * Find server address.
 	 * @return String - Server IP
+	 * @author Michiel De Mey
 	 */
 	private String findServer() {
 		

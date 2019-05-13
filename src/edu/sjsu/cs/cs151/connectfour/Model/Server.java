@@ -67,6 +67,7 @@ public class Server extends Network implements Runnable {
 	
 	/**
 	 * Broadcasts message to all UDP ports and waits for reply from client.
+	 * @author Michiel De Mey
 	 */
 	private void broadcastMessage() {
 		try {
