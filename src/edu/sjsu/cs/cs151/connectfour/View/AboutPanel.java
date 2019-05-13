@@ -4,8 +4,7 @@
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
- * About window for Connect Four. 
- * (renamed from ConnectFourAboutWindow)
+ * About panel for Connect Four. 
  * 
  * @author Albert Ong
  * @since 09.05.2019
@@ -36,7 +35,7 @@ public class AboutPanel extends JPanel {
     gbc.insets = new Insets(0, 0, 20, 0);
     
     // Adds the about page text
-    URL url = View.class.getResource("/resources/ConnectFourAboutWindow_text.png");
+    URL url = AboutPanel.class.getResource("/AboutPanel_text.png");
     JLabel text = new JLabel(new ImageIcon(url));
     add(text, gbc);
     

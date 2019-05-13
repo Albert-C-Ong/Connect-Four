@@ -19,6 +19,12 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class Controller {
 
+	private BlockingQueue<Message> messageQueue;
+	private View view;
+	private Model model;
+	private List<Valve> valves = new LinkedList<>();
+	public static final Server SERVER = new Server();
+	public static final Client CLIENT = new Client();
 	
 	/**
 	 * Constructor - initializes view, model, messageQueue, and valves
@@ -33,7 +39,6 @@ public class Controller {
 		messageQueue = queue;
 		
 		valves.add(new StartLocalGameValve(view));
-		valves.add(new StartOnlineGameValve(view, queue));
 		valves.add(new OpenAboutValve(view));
 		valves.add(new CloseAboutValve(view));
 		valves.add(new CloseFrameValve());
@@ -42,7 +47,10 @@ public class Controller {
 		valves.add(new QuitGameValve(model, view));
 		valves.add(new RestartGameValve(model, view));
 		valves.add(new JoinAsClientValve(view));
-		valves.add(new JoinAsServerValve(view, queue));
+		valves.add(new StartServerValve(view));
+		valves.add(new SetGameBorderValve());
+		valves.add(new PlayerLeftValve());
+		valves.add(new PlayerRestartValve());
 	}
 	
 	
@@ -70,11 +78,4 @@ public class Controller {
 			//if response becomes finish, then loop stops
 		}
 	}
-	
-	
-	
-	private BlockingQueue<Message> messageQueue;
-	private View view;
-	private Model model;
-	private List<Valve> valves = new LinkedList<Valve>();
 }

@@ -22,10 +22,9 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
 
 public class ConnectFour {
 
-	private static BlockingQueue<Message> queue = new LinkedBlockingQueue<Message>();
-	private static View view;
-	private static Model model;
-	
+	public static BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+	public static View view;
+	public static Model model;	
 
 	public static void main(String[] args) {
 		view = new View(queue);

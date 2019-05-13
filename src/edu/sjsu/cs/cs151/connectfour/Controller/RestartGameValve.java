@@ -34,19 +34,14 @@ public class RestartGameValve implements Valve {
 		RestartGameMessage specificMessage = (RestartGameMessage) message;
 		
 		//if local game, just clear board
-		if (specificMessage.getLocalGame())
-			view.getGamePanel().clearBoard();
+		view.getGamePanel().clearBoard();
 		
-		//if online game, clear board + send move
-		else {
-			if (specificMessage.getPlayer() == Model.getPlayerOne()) {
-				view.getServer().sendMove("GAME_RESTART");
-				view.getServer().clearBoard();
-			}
-			else {
-				view.getClient().sendMove("GAME_RESTART");
-				view.getClient().clearBoard();
-			}
+		if (!specificMessage.getLocalGame()) {
+			
+			if (Controller.SERVER.getActiveStatus())
+				Controller.SERVER.sendMove(new GameMoveMessage(true));
+				
+			else Controller.CLIENT.sendMove(new GameMoveMessage(true));
 		}
 		
 		return ValveResponse.EXECUTED;

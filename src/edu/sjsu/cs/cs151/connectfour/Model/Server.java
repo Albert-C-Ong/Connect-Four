@@ -1,67 +1,69 @@
-package edu.sjsu.cs.cs151.connectfour.network;
+package edu.sjsu.cs.cs151.connectfour.Model;
 
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.BlockingQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 import edu.sjsu.cs.cs151.connectfour.Controller.Message;
+import edu.sjsu.cs.cs151.connectfour.Controller.SetGameBorderMessage;
 import edu.sjsu.cs.cs151.connectfour.View.View;
+import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
 
-public class Server extends Network {
+public class Server extends Network implements Runnable {
 
 	private ServerSocket server;
 	private DatagramSocket socket;
 	
-	private View parent;
-	
-	// constructor
-	public Server(BlockingQueue<Message> queue, View parent) {
-		super(queue, "Player 1");
-		this.parent = parent;
-		setVisible(false);
-	}
-
-	public void startRunning() {
+	/**
+	 * Starts server and accepts connection request from client.
+	 */
+	@Override
+	public void run() {
+		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerOne());
+		isActive = true;
 		broadcastMessage();
 		
 		try {
-			server = new ServerSocket(8888, 2); // 8888 is a dummy port for testing, this can be changed. The 2 is
+			ConnectFour.queue.put(new SetGameBorderMessage(Model.getPlayerOne()));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try {
+			server = new ServerSocket(port, 1); // 8888 is a dummy port for testing, this can be changed. The 2 is
 													// the maximum people waiting to connect.
 			while (true) {
 				// Trying to connect and have match
-				waitForConnection();
-				parent.replacePanel(parent.getLoadingPanel(), this);
+				connection = server.accept();
 				super.startRunning();
 			}
 		} catch (IOException ioException) {
-			ioException.printStackTrace();
 		}
 	}
-
-	// wait for connection, then display connection information
-	private void waitForConnection() throws IOException {
-		connection = server.accept();
-	}
 	
+	/**
+	 * Closes server
+	 */
 	@Override
 	public void closeConnection() {
-		
-		super.closeConnection();
 		try {
-			server.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			super.closeConnection();
+			try {
+				server.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch(NullPointerException nullEx) {	
 		}
 	}
 	
-
+	/**
+	 * Broadcasts message to all UDP ports and waits for reply from client.
+	 */
 	private void broadcastMessage() {
 		try {
 			// Keep a socket open to listen to all the UDP trafic that is destined for this port
-			socket = new DatagramSocket(8888, InetAddress.getByName("0.0.0.0"));
+			socket = new DatagramSocket(port, InetAddress.getByName("0.0.0.0"));
 			socket.setBroadcast(true);
 
 			while (true) {

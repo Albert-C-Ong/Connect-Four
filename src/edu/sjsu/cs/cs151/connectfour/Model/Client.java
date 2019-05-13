@@ -1,52 +1,63 @@
-package edu.sjsu.cs.cs151.connectfour.network;
+package edu.sjsu.cs.cs151.connectfour.Model;
 
 import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
 import java.util.concurrent.BlockingQueue;
-
 import edu.sjsu.cs.cs151.connectfour.Controller.Message;
+import edu.sjsu.cs.cs151.connectfour.Controller.SetGameBorderMessage;
 import edu.sjsu.cs.cs151.connectfour.View.View;
+import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
 
-public class Client extends Network {
+
+public class Client extends Network implements Runnable {
 
 	private String serverIP;
+	
+	/**
+	 * Join a server if available.
+	 */
+	@Override
+	public void run() {
+		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerTwo());
 
-	// constructor
-	public Client(BlockingQueue<Message> queue) {
-		super(queue, "Player 2");
-	}
-
-	// connect to server
-	public void startRunning() {
 		try {
-			connectToServer();
-		} catch (IOException e) {
+			ConnectFour.queue.put(new SetGameBorderMessage(Model.getPlayerTwo()));
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		super.startRunning();
+		try {
+			//Connect to Server
+			isActive = true;
+			serverIP = findServer();
+			if(serverIP == null) {
+				return;
+			}
+			connection = new Socket(InetAddress.getByName(serverIP), port);
+			super.startRunning();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 	}
-
-	// connect to server
-	private void connectToServer() throws IOException {
-		connection = new Socket(InetAddress.getByName(serverIP), 8888);
-	}
-
-	public String findServer() {
+	
+	/**
+	 * Find server address.
+	 * @return String - Server IP
+	 */
+	private String findServer() {
 		
 		// Find the server using UDP broadcast
 		try {
 			// Open a random port to send the package
 			DatagramSocket c = new DatagramSocket();
 			c.setBroadcast(true);
-			c.setSoTimeout(2000);
 			
 			byte[] sendData = "DISCOVER_FUIFSERVER_REQUEST".getBytes();
 
 			// Try the 255.255.255.255 first
 			try {
 				DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length,
-						InetAddress.getByName("255.255.255.255"), 8888);
+						InetAddress.getByName("255.255.255.255"), port);
 				c.send(sendPacket);
 			} catch (Exception e) {
 			}
@@ -68,7 +79,7 @@ public class Client extends Network {
 
 					// Send the broadcast package!
 					try {
-						DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 8888);
+						DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, port);
 						c.send(sendPacket);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -79,12 +90,7 @@ public class Client extends Network {
 			// Wait for a response
 			byte[] recvBuf = new byte[15000];
 			DatagramPacket receivePacket = new DatagramPacket(recvBuf, recvBuf.length);
-			try {
-		    	c.receive(receivePacket);
-		    } catch(SocketTimeoutException e) {
-		    	c.close();
-		    	return "No Host";
-		    }
+			c.receive(receivePacket);
 
 			// Check if received message is correct
 			String message = new String(receivePacket.getData()).trim();
@@ -101,9 +107,5 @@ public class Client extends Network {
 			System.out.println("Oops");
 		}
 		return null;
-	}
-
-	public void setServerIP(String serverIP) {
-		this.serverIP = serverIP;
 	}
 }

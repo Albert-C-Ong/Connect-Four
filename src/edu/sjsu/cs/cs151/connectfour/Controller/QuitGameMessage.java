@@ -13,23 +13,13 @@ package edu.sjsu.cs.cs151.connectfour.Controller;
  */
 public class QuitGameMessage extends Message {
 	
-	
-	public QuitGameMessage(String player, boolean localGame) {
-		this.player = player;
+	public QuitGameMessage(boolean localGame) {
 		this.localGame = localGame;
 	}
-	
-	
-	public String getPlayer() {
-		return player;
-	}
-	
 	
 	public boolean getLocalGame() {
 		return localGame;
 	}
 	
-	
-	private String player;
 	private boolean localGame;
 }
