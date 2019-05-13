@@ -13,7 +13,9 @@ package edu.sjsu.cs.cs151.connectfour.Controller;
  */
 public class CloseFrameValve implements Valve {
 	
-	//this valve's entire purpose is to return FINISH (stop controller loop)
+	/**
+	 * Returns FINISH, which stops the controller loop
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != CloseFrameMessage.class)
 			return ValveResponse.MISS;

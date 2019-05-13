@@ -4,7 +4,7 @@ import edu.sjsu.cs.cs151.connectfour.Model.Model;
 import edu.sjsu.cs.cs151.connectfour.View.GamePanel;
 import edu.sjsu.cs.cs151.connectfour.View.View;
 
-/** DoNewGameValve.java
+/** RestartGameValve.java
  * 
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
@@ -17,12 +17,20 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class RestartGameValve implements Valve {
 
+	/**
+	 * Ctor - initalizes variables
+	 * @param model
+	 * @param view
+	 */
 	public RestartGameValve(Model model, View view) {
 		this.model = model;
 		this.view = view;
 	}
 	
 	
+	/**
+	 * Resets model and view
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != RestartGameMessage.class)
 			return ValveResponse.MISS;

@@ -18,12 +18,23 @@ import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
  */
 public class ColumnSelectedValve implements Valve {
 
+	/**
+	 * Ctor - initializes variables
+	 * @param model
+	 * @param view
+	 */
 	public ColumnSelectedValve(Model model, View view) {
 		this.model = model;
 		this.view = view;
 		gamePanel = view.getGamePanel();
 	}
 
+	
+	/**
+	 * Updates the model after a player moves
+	 * Updates the view to reflect model changes
+	 * If it's an online game, sends the move to the other player
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != ColumnSelectedMessage.class)
 			return ValveResponse.MISS;

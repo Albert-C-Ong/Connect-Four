@@ -9,6 +9,14 @@ import java.net.Socket;
 import edu.sjsu.cs.cs151.connectfour.Controller.*;
 import edu.sjsu.cs.cs151.connectfour.app.ConnectFour;
 
+/** Network.java
+ * 
+ * CS 151 Spring 2019
+ * Professor Katarzyna Tarnowska
+ * 
+ * @author Krish Ghiya
+ * @since 12.05.2019
+ */
 public class Network {
 	
 	protected boolean isActive = false;

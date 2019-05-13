@@ -1,22 +1,16 @@
 package edu.sjsu.cs.cs151.connectfour.Controller;
 
-import java.io.IOException;
-import java.util.concurrent.BlockingQueue;
-
-import javax.swing.SwingWorker;
-
-import edu.sjsu.cs.cs151.connectfour.Model.Server;
 import edu.sjsu.cs.cs151.connectfour.View.View;
 
-/** JoinAsServerValve.java
+/** StartServerValve.java
  * 
  * CS 151 Spring 2019
  * Professor Katarzyna Tarnowska
  * 
  * A Valve used when joining an online game as the host
  * 
- * @author Holly Lind
- * @since 09.05.2019
+ * @author Krish Ghiya
+ * @since 12.05.2019
  */
 public class StartServerValve implements Valve {
 	

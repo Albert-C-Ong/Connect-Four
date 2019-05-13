@@ -7,7 +7,7 @@
  * The main program to the Connect Four game. 
  * 
  * @author Krish Ghiya, Holly Lind, and Albert Ong
- * @since 24.04.2019
+ * @since 12.05.2019
  */
 
 package edu.sjsu.cs.cs151.connectfour.app;

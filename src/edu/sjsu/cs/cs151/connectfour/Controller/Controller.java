@@ -19,10 +19,7 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class Controller {
 
-	private BlockingQueue<Message> messageQueue;
-	private View view;
-	private Model model;
-	private List<Valve> valves = new LinkedList<>();
+
 	public static final Server SERVER = new Server();
 	public static final Client CLIENT = new Client();
 	
@@ -78,4 +75,9 @@ public class Controller {
 			//if response becomes finish, then loop stops
 		}
 	}
+	
+	private BlockingQueue<Message> messageQueue;
+	private View view;
+	private Model model;
+	private List<Valve> valves = new LinkedList<>();
 }

@@ -14,12 +14,18 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  */
 public class StartLocalGameValve implements Valve {
 	
-	
+	/**
+	 * Ctor - initializes view
+	 * @param view
+	 */
 	public StartLocalGameValve(View view) {
 		this.view = view;
 	}
 
 	
+	/**
+	 * Replaces menu panel with game panel
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != StartLocalGameMessage.class)
 			return ValveResponse.MISS;

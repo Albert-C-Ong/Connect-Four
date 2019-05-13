@@ -23,7 +23,7 @@ public class Button extends JButton {
   private int y;
   
   /**
-   * Creates a Button
+   * Ctor - creates a Button with coordinates
    * @param x
    * @param y
    */
@@ -32,6 +32,10 @@ public class Button extends JButton {
     this.y = y;
   }
   
+  /**
+   * Ctor - creates button with image
+   * @param icon
+   */
   public Button(ImageIcon icon) {
     super(icon);
   }

@@ -34,7 +34,7 @@ public class JoinAsClientValve implements Valve {
 
 		//actions in model - none
 		
-		//actions in view
+		//actions in view - none
 		
 		//Thread stuff
 		Thread thread = new Thread(Controller.CLIENT);
