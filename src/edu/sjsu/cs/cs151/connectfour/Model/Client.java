@@ -14,6 +14,9 @@ public class Client extends Network implements Runnable {
 
 	private String serverIP;
 	
+	/**
+	 * Join a server if available.
+	 */
 	@Override
 	public void run() {
 		ConnectFour.view.getGamePanel().setPlayer(Model.getPlayerTwo());
@@ -36,7 +39,11 @@ public class Client extends Network implements Runnable {
 			e.printStackTrace();
 		}	
 	}
-
+	
+	/**
+	 * Find server address.
+	 * @return String - Server IP
+	 */
 	private String findServer() {
 		
 		// Find the server using UDP broadcast

@@ -1,5 +1,6 @@
 package edu.sjsu.cs.cs151.connectfour.Controller;
 
+import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 
 import javax.swing.SwingWorker;
@@ -18,13 +19,19 @@ import edu.sjsu.cs.cs151.connectfour.View.View;
  * @since 09.05.2019
  */
 public class StartServerValve implements Valve {
-
-	public static Thread thread;
+	
+	/**
+	 * Ctor that assigns view to local view
+	 * @param view - static view
+	 */
 	public StartServerValve(View view) {
 		this.view = view;
 	}
 	
-	
+	/**
+	 * Starts server on new thread.
+	 * @return {@link ValveResponse} whether process was executed or not
+	 */
 	public ValveResponse execute(Message message) {
 		if (message.getClass() != StartServerMessage.class)
 			return ValveResponse.MISS;
@@ -34,7 +41,7 @@ public class StartServerValve implements Valve {
 		//actions in view
 		
 		//Thread
-		thread = new Thread(Controller.SERVER);
+		Thread thread = new Thread(Controller.SERVER);
 		thread.start();
 		
 		return ValveResponse.EXECUTED;
