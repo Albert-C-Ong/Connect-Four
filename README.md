@@ -22,4 +22,4 @@ Supports both local play as well as online multiplayer across private networks a
 * [Eclipse](https://www.eclipse.org/) // IDE
 
 ## Acknowledgement
-Connect Four war created by [Krish Ghiya](https://github.com/krishghiya), [Holly Lind](https://github.com/hollylind), and [Albert Ong](https://github.com/Anferensis). 
+Connect Four was created by [Krish Ghiya](https://github.com/krishghiya), [Holly Lind](https://github.com/hollylind), and [Albert Ong](https://github.com/Albert-C-Ong). 
